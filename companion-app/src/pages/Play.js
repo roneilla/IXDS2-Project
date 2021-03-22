@@ -20,7 +20,6 @@ const StyledImg = styled.img`
 
 const StyledContainer = styled(Container)`
 	text-align: center;
-	height: 100vh;
 `;
 
 const HeaderText = styled.p`

@@ -17,7 +17,8 @@ const Nav = styled.nav`
 const NavMenu = styled.ul`
 	display: flex;
 	justify-content: space-between;
-	width: 25%;
+	align-items: center;
+	width: 50%;
 `;
 
 const NavItem = styled.li`

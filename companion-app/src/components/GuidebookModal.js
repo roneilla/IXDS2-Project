@@ -42,7 +42,7 @@ const GuidebookModal = () => {
 	const [toggle, setToggle] = useState(false);
 
 	return (
-		<Container>
+		<Container style={{ padding: '0' }}>
 			<StyledButton onClick={() => setToggle(true)}>
 				View Guidebook
 			</StyledButton>

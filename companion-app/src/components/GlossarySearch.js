@@ -25,13 +25,14 @@ const Modal = styled.div`
 
 const StyledSearchBar = styled.input`
 	font-size: 1rem;
-	padding: 1rem;
+	padding: 0.5rem 1rem;
 	border: #ccc solid 1px;
 	border-radius: 5px;
 	position: relative;
 	width: 100%;
 	max-width: 600px;
 	margin: 0 auto;
+	height: 100%;
 `;
 
 const Title = styled.h1`

@@ -23,21 +23,20 @@ const MaterialIcons = styled.div`
 	font-family: 'Material Icons';
 `;
 
-const StockCard = (props, receiveAmount) => {
+const StockCard = (props) => {
 	const [stockPrice, setStockPrice] = useState(0);
 	const previousPriceRef = useRef();
 
-	const MINUTE_MS = 1000; // 5 minutes
+	const MINUTE_MS = 1000; // 5 minutes is 300000
+
+	let growth = Math.floor(props.monthlyGrowth * props.roundCounter);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setStockPrice(
-				Math.floor(
-					Math.random(props.startPrice, props.startPrice + props.priceRange) *
-						1000
-				)
+				props.startingPrice + Math.floor(Math.random(0, growth) * 100)
 			);
-			console.log('Logs every minute');
+			console.log('Logs every second');
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);
@@ -73,13 +72,14 @@ const StockCard = (props, receiveAmount) => {
 	);
 };
 
-const StockMarket = () => {
+const StockMarket = (props) => {
 	const stocks = stockMarketData.map((stock) => (
 		<StockCard
+			roundCounter={props.roundCounter}
 			stockTicker={stock.ticker}
 			stockName={stock.stockName}
-			currentPrice={stock.startingPrice}
-			priceRange={stock.priceRange}
+			startingPrice={stock.startingPrice}
+			monthlyGrowth={stock.monthlyGrowth}
 			key={stock.ticker}></StockCard>
 	));
 

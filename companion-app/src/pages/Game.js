@@ -64,9 +64,8 @@ const Game = () => {
 	const [roundCount, setRoundCount] = useState(0);
 	const [openDialog, setOpenDialog] = useState(false);
 
-	const updateEvents = () => {};
-
 	const history = useHistory();
+
 	return (
 		<Container
 			style={{

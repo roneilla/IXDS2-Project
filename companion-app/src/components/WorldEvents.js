@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const CurrentNewsContainer = styled.div`
 	font-size: 4rem;
+	transition: 2s;
 `;
 
 const EventCard = styled.div`
@@ -25,7 +26,7 @@ const PastEventsContainer = styled.div`
 `;
 
 const WorldEvents = (props) => {
-	// randomize order of world events
+	// TODO: randomize order of world events
 
 	return (
 		<Container>

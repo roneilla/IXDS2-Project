@@ -3,19 +3,19 @@ const stockMarketData = [
 		stockName: 'Apple',
 		ticker: 'AAPL',
 		startingPrice: 70,
-		priceRange: 200,
+		monthlyGrowth: 5,
 	},
 	{
 		stockName: 'Tesla',
 		ticker: 'TESL',
 		startingPrice: 80,
-		priceRange: 700,
+		monthlyGrowth: 30,
 	},
 	{
 		stockName: 'Facebook',
 		ticker: 'FB',
 		startingPrice: 80,
-		priceRange: 200,
+		monthlyGrowth: 20,
 	},
 ];
 

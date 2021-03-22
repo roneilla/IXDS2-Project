@@ -4,14 +4,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { FlexBetween } from './global';
 import GlossarySearch from './../components/GlossarySearch';
 import GuidebookModal from './../components/GuidebookModal';
+import Glyph from './../assets/glyph.svg';
 
 const Nav = styled.nav`
 	width: 100%;
 	padding: 1rem 2rem;
-	background-color: white;
+	background-color: #f9f1ea;
 	display: flex;
 	justify-content: space-between;
-	border-bottom: #ccc solid 1px;
 `;
 
 const NavMenu = styled.ul`
@@ -30,6 +30,12 @@ const StyledLink = styled(Link)`
 	text-decoration: none;
 `;
 
+const StyledImg = styled.img`
+	&:hover {
+		transform: translateX(360deg);
+	}
+`;
+
 const NavBar = () => {
 	const location = useLocation();
 
@@ -37,7 +43,7 @@ const NavBar = () => {
 		return (
 			<Nav>
 				<StyledLink to="/">
-					<img alt="Logo"></img>
+					<StyledImg src={Glyph} alt="Logo"></StyledImg>
 				</StyledLink>
 
 				<NavMenu>
@@ -65,7 +71,7 @@ const NavBar = () => {
 				<FlexBetween>
 					<span style={{ width: '25%' }}>
 						<StyledLink to="/">
-							<img alt="Logo"></img>
+							<StyledImg src={Glyph} alt="Logo"></StyledImg>
 						</StyledLink>
 					</span>
 

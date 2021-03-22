@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import glossary from './../glossary';
 
-import { Container } from './../shared/global';
+import { Container, H1, H3, P } from './../shared/global';
 
 const StyledSearchBar = styled.input`
 	font-size: 1rem;
 	padding: 1rem;
-	border: #ccc solid 1px;
-	border-radius: 5px;
+	border: #333 solid 1px;
 	position: relative;
 	width: 100%;
 	max-width: 1000px;
@@ -19,7 +18,6 @@ const Header = styled.div`
 	width: 100%;
 	text-align: center;
 	margin-bottom: 1rem;
-	background-color: #ccc;
 	padding: 1rem 0;
 `;
 
@@ -33,9 +31,9 @@ const GlossaryCard = styled.div`
 	width: 100%;
 	max-width: 1000px;
 	padding: 1rem;
-	margin: 1rem 0;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+	margin: 0.5rem 0;
+	border: 1px solid #333;
+	background-color: white;
 `;
 
 const GlossaryPage = (props) => {
@@ -43,8 +41,8 @@ const GlossaryPage = (props) => {
 
 	const allGlossaryItems = glossary.map((data) => (
 		<GlossaryCard key={data.term}>
-			<h1>{data.term}</h1>
-			<p>{data.definition}</p>
+			<H3>{data.term}</H3>
+			<P>{data.definition}</P>
 		</GlossaryCard>
 	));
 
@@ -52,14 +50,14 @@ const GlossaryPage = (props) => {
 		.filter(({ term }) => term === filterTerm.toLowerCase())
 		.map((data) => (
 			<GlossaryCard key={data.term}>
-				<h1>{data.term}</h1>
-				<p>{data.definition}</p>
+				<H3>{data.term}</H3>
+				<P>{data.definition}</P>
 			</GlossaryCard>
 		));
 	return (
 		<>
 			<Header>
-				<h1 style={{ margin: '1rem 0' }}>Glossary</h1>
+				<H1 style={{ margin: '1rem 0' }}>Glossary</H1>
 				<StyledSearchBar
 					value={filterTerm}
 					placeholder="Search for Terms"

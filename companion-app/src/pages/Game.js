@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container, PrimaryButton } from './../shared/global';
+import { Container, PrimaryButton, Subtitle } from './../shared/global';
 import WorldEvents from '../components/WorldEvents';
 import StockMarket from '../components/StockMarket';
 
@@ -15,8 +15,8 @@ const Grid = styled.div`
 const DashboardItem = styled.div`
 	grid-column: span 1;
 	padding: 1rem;
-	border: #ccc 1px solid;
-	border-radius: 5px;
+	border: #333 1px solid;
+	background-color: white;
 	margin: 1rem 0;
 	overflow: auto;
 	height: calc(100vh - 75px - 50px - 2rem);
@@ -25,6 +25,9 @@ const DashboardItem = styled.div`
 const RoundCounter = styled.h1`
 	font-size: 5rem;
 	margin: 2rem 0;
+	font-family: ohno-blazeface, sans-serif;
+	font-weight: 700;
+	color: white;
 `;
 
 const Modal = styled.div`
@@ -43,7 +46,7 @@ const Modal = styled.div`
 `;
 
 const RoundTrackerContainer = styled.div`
-	background-color: #444;
+	background-color: #fac969;
 	color: #fff;
 	width: 100%;
 	padding: 1rem;
@@ -58,6 +61,17 @@ const ButtonContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+`;
+
+const ButtonsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	& ${PrimaryButton} {
+		margin: 1rem 0;
+	}
 `;
 
 const Game = () => {
@@ -76,16 +90,18 @@ const Game = () => {
 					<RoundTrackerContainer>
 						<RoundCounter> {roundCount}</RoundCounter>
 
-						<PrimaryButton
-							onClick={() => {
-								setRoundCount(roundCount + 1);
-								console.log('hi');
-							}}>
-							Next Round
-						</PrimaryButton>
-						<PrimaryButton onClick={() => setOpenDialog(true)}>
-							End Game
-						</PrimaryButton>
+						<ButtonsContainer>
+							<PrimaryButton
+								onClick={() => {
+									setRoundCount(roundCount + 1);
+									console.log('hi');
+								}}>
+								Next Round
+							</PrimaryButton>
+							<PrimaryButton onClick={() => setOpenDialog(true)}>
+								End Game
+							</PrimaryButton>
+						</ButtonsContainer>
 
 						{openDialog === true ? (
 							<Modal>

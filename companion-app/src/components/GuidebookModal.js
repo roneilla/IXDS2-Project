@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClearButton, Container } from './../shared/global';
+import { Container, PrimaryButton } from './../shared/global';
 import styled from 'styled-components';
 import Collapsible from 'react-collapsible';
 import { GrFormClose } from 'react-icons/gr';
@@ -26,7 +26,7 @@ const Header = styled.div`
 	justify-content: space-between;
 `;
 
-const StyledButton = styled(ClearButton)`
+const StyledButton = styled(PrimaryButton)`
 	position: relative;
 `;
 
@@ -42,7 +42,7 @@ const GuidebookModal = () => {
 	const [toggle, setToggle] = useState(false);
 
 	return (
-		<Container style={{ padding: '0' }}>
+		<div style={{ padding: '0' }}>
 			<StyledButton onClick={() => setToggle(true)}>
 				View Guidebook
 			</StyledButton>
@@ -90,7 +90,7 @@ const GuidebookModal = () => {
 					</Collapsible>
 				</Modal>
 			) : null}
-		</Container>
+		</div>
 	);
 };
 

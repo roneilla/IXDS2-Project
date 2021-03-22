@@ -1,36 +1,37 @@
-* { 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: #333;
+	font-family: freight-macro-pro, serif;
 }
 
 .Collapsible {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 1rem auto;
-  max-width: 1000px;
-  text-align: left;
+	padding: 1rem;
+	border: 1px solid #333;
+	margin: 1rem auto;
+	max-width: 1000px;
+	text-align: left;
+	background-color: white;
 }
 
 .Collapsible__trigger:after {
-  font-family: 'Material Icons';
-  content: 'expand_more';
-  display: inline;
-  transition: transform 300ms;
-  float: right;
+	font-family: 'Material Icons';
+	content: 'expand_more';
+	display: inline;
+	transition: transform 300ms;
+	float: right;
 }
 
 .Collapsible__trigger.is-open:after {
-  transform: rotateZ(-180deg);
+	transform: rotateZ(-180deg);
 }
 
 .Collapsible__trigger {
-  font-size: 1.25rem; 
-  font-weight: 700;
+	font-size: 1.25rem;
+	font-weight: 700;
 }
 
 .Collapsible__contentInner {
-  margin-top: 1rem;
+	margin-top: 1rem;
 }

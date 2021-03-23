@@ -1,130 +1,58 @@
-import React, { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { Container, PrimaryButton, Subtitle } from './../shared/global';
-import WorldEvents from '../components/WorldEvents';
-import StockMarket from '../components/StockMarket';
-
-const Grid = styled.div`
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-column-gap: 1rem;
-	padding: 0 1rem;
-`;
-
-const DashboardItem = styled.div`
-	grid-column: span 1;
-	padding: 1rem;
-	border: #333 1px solid;
-	background-color: white;
-	margin: 1rem 0;
-	overflow: auto;
-	height: calc(100vh - 75px - 50px - 2rem);
-`;
-
-const RoundCounter = styled.h1`
-	font-size: 5rem;
-	margin: 2rem 0;
-	font-family: ohno-blazeface, sans-serif;
-	font-weight: 700;
-	color: white;
-`;
-
-const Modal = styled.div`
-	background-color: #fff;
-	position: absolute;
-	left: 0;
-	right: 0;
-	border: #ccc solid 1px;
-	margin: 1rem auto;
-	width: 100%;
-	max-width: 500px;
-	padding: 1rem;
-	border-radius: 5px;
-	color: #000;
-	text-align: center;
-`;
-
-const RoundTrackerContainer = styled.div`
-	background-color: #fac969;
-	color: #fff;
-	width: 100%;
-	padding: 1rem;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
-	height: 100%;
-`;
-
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-const ButtonsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-
-	& ${PrimaryButton} {
-		margin: 1rem 0;
-	}
-`;
+import React, { useState } from 'react';
+import { Container, H1, PrimaryButton } from '../shared/global';
+import axios from 'axios';
 
 const Game = () => {
-	const [roundCount, setRoundCount] = useState(0);
-	const [openDialog, setOpenDialog] = useState(false);
+	const [username, setUsername] = useState();
+	const [role, setRole] = useState();
 
-	const history = useHistory();
+	const beginGame = (e) => {
+		e.preventDefault();
+		console.log(username + ' is a ' + role);
+
+		const user = {
+			username: username,
+			role: role,
+		};
+
+		axios
+			.post('http://localhost:5000/users/add', user)
+			.then((res) => console.log(res.data));
+	};
 
 	return (
-		<Container
-			style={{
-				padding: '0',
-			}}>
-			<Grid>
-				<DashboardItem style={{ padding: '0rem' }}>
-					<RoundTrackerContainer>
-						<RoundCounter> {roundCount}</RoundCounter>
+		<Container>
+			<div>
+				<H1>What is your role?</H1>
 
-						<ButtonsContainer>
-							<PrimaryButton
-								onClick={() => {
-									setRoundCount(roundCount + 1);
-									console.log('hi');
-								}}>
-								Next Round
-							</PrimaryButton>
-							<PrimaryButton onClick={() => setOpenDialog(true)}>
-								End Game
-							</PrimaryButton>
-						</ButtonsContainer>
+				<label for="username">Username</label>
+				<input
+					placeholder="Write your username here"
+					onChange={(e) => {
+						setUsername(e.target.value);
+					}}></input>
 
-						{openDialog === true ? (
-							<Modal>
-								<h2>Are you sure you want to end the game?</h2>
-								<ButtonContainer>
-									<PrimaryButton onClick={() => setOpenDialog(false)}>
-										No, continue game
-									</PrimaryButton>
-									<PrimaryButton onClick={() => history.push('/play-again')}>
-										Yes, end game
-									</PrimaryButton>
-								</ButtonContainer>
-							</Modal>
-						) : null}
-					</RoundTrackerContainer>
-				</DashboardItem>
-				<DashboardItem>
-					<WorldEvents roundCounter={roundCount}></WorldEvents>
-				</DashboardItem>
-				<DashboardItem>
-					<StockMarket roundCounter={roundCount}></StockMarket>
-				</DashboardItem>
-			</Grid>
+				<div
+					onChange={(e) => {
+						setRole(e.target.value);
+					}}>
+					<input type="radio" id="player" name="role" value="player"></input>
+					<label for="player">Player</label>
+					<br></br>
+
+					<input
+						type="radio"
+						id="gamemaster"
+						name="role"
+						value="gamemaster"></input>
+					<label for="gamemaster">Gamemaster</label>
+					<br></br>
+				</div>
+				<PrimaryButton onClick={beginGame}>Submit</PrimaryButton>
+			</div>
+			<div>
+				<H1>Join Server</H1>
+			</div>
 		</Container>
 	);
 };

@@ -13,14 +13,16 @@ import NavBar from './shared/NavBar';
 import Footer from './shared/Footer';
 
 import Home from './pages/Home';
-import Game from './pages/Game';
+import Gamemaster from './pages/Gamemaster';
 import GlossaryPage from './pages/GlossaryPage';
 import Guidebook from './pages/Guidebook';
 import About from './pages/About';
 import Help from './pages/Help';
 import PlayAgain from './pages/PlayAgain';
-import FinanceTracker from './pages/FinanceTracker';
+import Player from './pages/Player';
 import CreateServer from './pages/CreateServer';
+import SampleRoom from './pages/SampleRoom';
+import Game from './pages/Game';
 
 const AppContainer = styled.div`
 	display: grid;
@@ -41,14 +43,16 @@ const App = () => {
 				<NavBar />
 				<DynamicContainer>
 					<Route exact path="/" component={Home} />
-					<Route exact path="/gamemaster" component={Game} />
-					<Route exact path="/player" component={FinanceTracker} />
+					<Route exact path="/game" component={Game} />
+					<Route exact path="/gamemaster" component={Gamemaster} />
+					<Route exact path="/player" component={Player} />
 					<Route exact path="/glossary" component={GlossaryPage} />
 					<Route exact path="/guidebook" component={Guidebook} />
 					<Route exact path="/about" component={About} />
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />
 					<Route exact path="/create-server" component={CreateServer} />
+					<Route exact path="/server/:id" component={SampleRoom} />
 				</DynamicContainer>
 				<Footer />
 			</AppContainer>

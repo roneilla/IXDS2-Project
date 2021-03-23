@@ -39,7 +39,7 @@ const StyledImg = styled.img`
 const NavBar = () => {
 	const location = useLocation();
 
-	if (location.pathname !== '/game') {
+	if (location.pathname !== '/player' && location.pathname !== '/gamemaster') {
 		return (
 			<Nav>
 				<StyledLink to="/">

@@ -48,7 +48,7 @@ router.route('/update/:id').post((req, res) => {
 
 			sample
 				.save()
-				.then(() => res.json('sSample updated!'))
+				.then(() => res.json('Sample updated!'))
 				.catch((err) => res.status(400).json('Error: ' + err));
 		})
 		.catch((err) => res.status(400).json('Error: ' + err));

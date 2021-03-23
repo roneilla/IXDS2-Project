@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const serverSchema = new Schema(
 	{
-		serverName: {
+		servername: {
 			type: String,
 			required: true,
 			unique: true,
@@ -17,6 +17,6 @@ const serverSchema = new Schema(
 	}
 );
 
-const ServerRoom = mongoose.model('User', serverSchema);
+const ServerRoom = mongoose.model('ServerRoom', serverSchema);
 
 module.exports = ServerRoom;

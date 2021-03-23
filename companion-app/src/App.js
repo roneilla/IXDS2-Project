@@ -20,6 +20,7 @@ import About from './pages/About';
 import Help from './pages/Help';
 import PlayAgain from './pages/PlayAgain';
 import FinanceTracker from './pages/FinanceTracker';
+import CreateServer from './pages/CreateServer';
 
 const AppContainer = styled.div`
 	display: grid;
@@ -47,6 +48,7 @@ const App = () => {
 					<Route exact path="/about" component={About} />
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />
+					<Route exact path="/create-server" component={CreateServer} />
 				</DynamicContainer>
 				<Footer />
 			</AppContainer>

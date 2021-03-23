@@ -2,15 +2,15 @@ const router = require('express').Router();
 let ServerRoom = require('../models/serverRoom.model');
 
 router.route('/').get((req, res) => {
-	User.find()
+	ServerRoom.find()
 		.then((serverRooms) => res.json(serverRooms))
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-	const username = req.body.username;
+	const servername = req.body.servername;
 
-	const newServerRoom = new ServerRoom({ username });
+	const newServerRoom = new ServerRoom({ servername });
 
 	newServerRoom
 		.save()

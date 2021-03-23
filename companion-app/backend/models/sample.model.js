@@ -14,6 +14,6 @@ const sampleSchema = new Schema(
 	}
 );
 
-const Sample = mongoose.model('Exercise', sampleSchema);
+const Sample = mongoose.model('Sample', sampleSchema);
 
 module.exports = Sample;

@@ -12,13 +12,14 @@ import ScrollToTop from './ScrollToTop';
 import NavBar from './shared/NavBar';
 import Footer from './shared/Footer';
 
-import Play from './pages/Play';
+import Home from './pages/Home';
 import Game from './pages/Game';
 import GlossaryPage from './pages/GlossaryPage';
 import Guidebook from './pages/Guidebook';
 import About from './pages/About';
 import Help from './pages/Help';
 import PlayAgain from './pages/PlayAgain';
+import FinanceTracker from './pages/FinanceTracker';
 
 const AppContainer = styled.div`
 	display: grid;
@@ -38,8 +39,9 @@ const App = () => {
 			<AppContainer>
 				<NavBar />
 				<DynamicContainer>
-					<Route exact path="/" component={Play} />
-					<Route exact path="/game" component={Game} />
+					<Route exact path="/" component={Home} />
+					<Route exact path="/gamemaster" component={Game} />
+					<Route exact path="/player" component={FinanceTracker} />
 					<Route exact path="/glossary" component={GlossaryPage} />
 					<Route exact path="/guidebook" component={Guidebook} />
 					<Route exact path="/about" component={About} />

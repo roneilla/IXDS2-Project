@@ -35,7 +35,7 @@ const StyledSearchBar = styled.input`
 	height: 100%;
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
 	font-size: 1rem;
 `;
 
@@ -47,7 +47,7 @@ const CloseButton = styled.button`
 	line-height: 2rem;
 `;
 
-const SearchTerm = styled.h1`
+const SearchTerm = styled.p`
 	text-transform: capitalize;
 	display: inline;
 	font-size: 1em;

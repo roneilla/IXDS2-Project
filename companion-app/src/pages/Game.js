@@ -25,7 +25,7 @@ const Game = () => {
 			<div>
 				<H1>What is your role?</H1>
 
-				<label for="username">Username</label>
+				<label htmlFor="username">Username</label>
 				<input
 					placeholder="Write your username here"
 					onChange={(e) => {
@@ -37,7 +37,7 @@ const Game = () => {
 						setRole(e.target.value);
 					}}>
 					<input type="radio" id="player" name="role" value="player"></input>
-					<label for="player">Player</label>
+					<label htmlFor="player">Player</label>
 					<br></br>
 
 					<input
@@ -45,7 +45,7 @@ const Game = () => {
 						id="gamemaster"
 						name="role"
 						value="gamemaster"></input>
-					<label for="gamemaster">Gamemaster</label>
+					<label htmlFor="gamemaster">Gamemaster</label>
 					<br></br>
 				</div>
 				<PrimaryButton onClick={beginGame}>Submit</PrimaryButton>

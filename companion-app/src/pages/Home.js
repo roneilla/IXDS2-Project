@@ -24,7 +24,7 @@ const StyledContainer = styled(Container)`
 	text-align: center;
 `;
 
-const HeaderText = styled.p`
+const HeaderText = styled.div`
 	padding: 2rem;
 	width: 50%;
 	margin: 0 auto;
@@ -35,7 +35,7 @@ const StyledLink = styled(Link)`
 	text-decoration: none;
 `;
 
-const Play = () => {
+const Home = () => {
 	return (
 		<div>
 			<StyledContainer>
@@ -54,4 +54,4 @@ const Play = () => {
 	);
 };
 
-export default Play;
+export default Home;

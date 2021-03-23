@@ -1,9 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container, PrimaryButton, Subtitle } from '../shared/global';
+import { Container, PrimaryButton } from '../shared/global';
 import WorldEvents from '../components/WorldEvents';
 import StockMarket from '../components/StockMarket';
+
+import queryString from 'query-string';
+import io from 'socket.io-client';
+
+let socket;
 
 const Grid = styled.div`
 	display: grid;
@@ -74,11 +79,47 @@ const ButtonsContainer = styled.div`
 	}
 `;
 
-const Gamemaster = () => {
+let connectionOptions = {
+	'force new connection': true,
+	reconnectionAttempts: 'Infinity',
+	timeout: 1000,
+	transports: ['websocket'],
+};
+
+const Gamemaster = ({ location }) => {
 	const [roundCount, setRoundCount] = useState(0);
 	const [openDialog, setOpenDialog] = useState(false);
 
+	const [username, setUsername] = useState('');
+	const [servername, setServername] = useState('');
+	const [message, setMessage] = useState('');
+	const [messages, setMessages] = useState([]);
+
 	const history = useHistory();
+
+	const ENDPOINT = 'http://localhost:5000';
+
+	useEffect(() => {
+		const { username, servername } = queryString.parse(location.search);
+
+		socket = io.connect(ENDPOINT, connectionOptions);
+
+		setUsername(username);
+		setServername(servername);
+
+		socket.emit('join', { username, servername }, ({}) => {});
+
+		return () => {
+			socket.emit('disconnect');
+			socket.off();
+		};
+	}, [ENDPOINT, location.search]);
+
+	useEffect(() => {
+		socket.on('message', (message) => {
+			setMessages([...messages, message]);
+		});
+	}, [messages]);
 
 	return (
 		<Container

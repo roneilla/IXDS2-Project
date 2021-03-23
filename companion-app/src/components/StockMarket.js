@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { P } from '../shared/global';
 import stockMarketData from './../stockMarketData';
 
 const Container = styled.div`

@@ -24,7 +24,7 @@ const StyledContainer = styled(Container)`
 	text-align: center;
 `;
 
-const HeaderText = styled.p`
+const HeaderText = styled.div`
 	padding: 2rem;
 	width: 50%;
 	margin: 0 auto;

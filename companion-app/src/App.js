@@ -21,7 +21,6 @@ import Help from './pages/Help';
 import PlayAgain from './pages/PlayAgain';
 import Player from './pages/Player';
 import CreateServer from './pages/CreateServer';
-import SampleRoom from './pages/SampleRoom';
 import Game from './pages/Game';
 
 const AppContainer = styled.div`
@@ -52,7 +51,6 @@ const App = () => {
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />
 					<Route exact path="/create-server" component={CreateServer} />
-					<Route exact path="/server/:id" component={SampleRoom} />
 				</DynamicContainer>
 				<Footer />
 			</AppContainer>

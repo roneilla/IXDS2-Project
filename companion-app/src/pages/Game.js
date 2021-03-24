@@ -59,7 +59,7 @@ const Game = () => {
 
 		for (let i = 0; i <= existingServers.length; i++) {
 			if (serverName === existingServers[i]) {
-				if (existingServers[i].population != 7) {
+				if (existingServers[i].population !== 7) {
 					axios
 						.post(
 							'http://localhost:5000/serverRoom/updatePopulation/' + serverName
@@ -71,6 +71,8 @@ const Game = () => {
 					history.push(
 						'/player?username=' + username + '&servername=' + serverName
 					);
+				} else {
+					console.log('too many people here');
 				}
 			} else {
 				console.log('server does not exist');

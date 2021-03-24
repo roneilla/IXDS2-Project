@@ -77,25 +77,28 @@ const ButtonsContainer = styled.div`
 `;
 
 const Gamemaster = ({ location }) => {
-	const [roundCount, setRoundCount] = useState(0);
+	const [roundCount, setRoundCount] = useState(1);
 	const [openDialog, setOpenDialog] = useState(false);
+	const [username, setUsername] = useState('');
 	const [servername, setServername] = useState('');
 
 	const history = useHistory();
 
 	useEffect(() => {
-		const { servername } = queryString.parse(location.search);
-
+		const { username, servername } = queryString.parse(location.search);
+		setUsername(username);
 		setServername(servername);
 	}, []);
 
-	const updateDb = () => {
+	const updateDb = (e) => {
+		e.preventDefault();
+
 		setRoundCount(roundCount + 1);
 
 		const roundCounter = {
 			roundcounter: roundCount,
 		};
-		console.log(roundCounter);
+
 		axios
 			.post(
 				'http://localhost:5000/serverRoom/updateRound/' + servername,
@@ -104,6 +107,8 @@ const Gamemaster = ({ location }) => {
 			.then((res) => {
 				console.log(res.data);
 			});
+
+		console.log(roundCount, roundCounter);
 	};
 
 	const endGame = () => {
@@ -124,8 +129,7 @@ const Gamemaster = ({ location }) => {
 			<Grid>
 				<DashboardItem style={{ padding: '0rem' }}>
 					<RoundTrackerContainer>
-						<RoundCounter> {roundCount}</RoundCounter>
-
+						<RoundCounter> {roundCount - 1}</RoundCounter>
 						<ButtonsContainer>
 							<PrimaryButton onClick={updateDb}>Next Round</PrimaryButton>
 							<PrimaryButton onClick={() => setOpenDialog(true)}>

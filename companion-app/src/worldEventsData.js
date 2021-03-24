@@ -1,6 +1,9 @@
 const worldEventsData = [
 	{
-		text: 'Here is the text',
+		text: 'Here is the text 0',
+	},
+	{
+		text: 'Here is the text 1',
 	},
 	{
 		text: 'Here is the text 2',

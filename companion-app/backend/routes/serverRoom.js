@@ -7,10 +7,16 @@ router.route('/').get((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/currentRound/:servername').get((req, res) => {
+	ServerRoom.findOne({ servername: req.params.servername })
+		.then((serverRooms) => res.json(serverRooms))
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
 	const servername = req.body.servername;
 	const population = req.body.population;
-	const roundcounter = 0;
+	const roundcounter = 1;
 
 	const newServerRoom = new ServerRoom({
 		servername,

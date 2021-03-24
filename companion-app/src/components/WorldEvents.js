@@ -34,14 +34,14 @@ const WorldEvents = (props) => {
 			<h2>Latest</h2>
 
 			{worldEventsData.map((data, index) =>
-				index === props.roundCounter ? (
+				index === props.roundCounter - 1 ? (
 					<CurrentNewsContainer key={index}>{data.text}</CurrentNewsContainer>
 				) : null
 			)}
 
 			<h2>Past</h2>
 			<PastEventsContainer>
-				{worldEventsData.slice(0, props.roundCounter).map((data, index) => (
+				{worldEventsData.slice(0, props.roundCounter - 1).map((data, index) => (
 					<EventCard key={index}>{data.text}</EventCard>
 				))}
 			</PastEventsContainer>

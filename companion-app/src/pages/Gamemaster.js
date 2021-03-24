@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container, PrimaryButton, Subtitle } from '../shared/global';
+import { Container, P, PrimaryButton, Subtitle } from '../shared/global';
 import WorldEvents from '../components/WorldEvents';
 import StockMarket from '../components/StockMarket';
+import axios from 'axios';
+import queryString from 'query-string';
 
 const Grid = styled.div`
 	display: grid;
@@ -74,11 +76,45 @@ const ButtonsContainer = styled.div`
 	}
 `;
 
-const Gamemaster = () => {
+const Gamemaster = ({ location }) => {
 	const [roundCount, setRoundCount] = useState(0);
 	const [openDialog, setOpenDialog] = useState(false);
+	const [servername, setServername] = useState('');
 
 	const history = useHistory();
+
+	useEffect(() => {
+		const { servername } = queryString.parse(location.search);
+
+		setServername(servername);
+	}, []);
+
+	const updateDb = () => {
+		setRoundCount(roundCount + 1);
+
+		const roundCounter = {
+			roundcounter: roundCount,
+		};
+		console.log(roundCounter);
+		axios
+			.post(
+				'http://localhost:5000/serverRoom/updateRound/' + servername,
+				roundCounter
+			)
+			.then((res) => {
+				console.log(res.data);
+			});
+	};
+
+	const endGame = () => {
+		axios
+			.delete('http://localhost:5000/serverRoom/' + servername)
+			.then((res) => {
+				console.log(res.data);
+			});
+
+		history.push('/play-again');
+	};
 
 	return (
 		<Container
@@ -91,13 +127,7 @@ const Gamemaster = () => {
 						<RoundCounter> {roundCount}</RoundCounter>
 
 						<ButtonsContainer>
-							<PrimaryButton
-								onClick={() => {
-									setRoundCount(roundCount + 1);
-									console.log('hi');
-								}}>
-								Next Round
-							</PrimaryButton>
+							<PrimaryButton onClick={updateDb}>Next Round</PrimaryButton>
 							<PrimaryButton onClick={() => setOpenDialog(true)}>
 								End Game
 							</PrimaryButton>
@@ -110,9 +140,7 @@ const Gamemaster = () => {
 									<PrimaryButton onClick={() => setOpenDialog(false)}>
 										No, continue game
 									</PrimaryButton>
-									<PrimaryButton onClick={() => history.push('/play-again')}>
-										Yes, end game
-									</PrimaryButton>
+									<PrimaryButton onClick={endGame}>Yes, end game</PrimaryButton>
 								</ButtonContainer>
 							</Modal>
 						) : null}

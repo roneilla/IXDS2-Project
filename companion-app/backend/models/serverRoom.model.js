@@ -11,6 +11,12 @@ const serverSchema = new Schema(
 			trim: true,
 			minlength: 3,
 		},
+		population: {
+			type: Number,
+		},
+		roundcounter: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

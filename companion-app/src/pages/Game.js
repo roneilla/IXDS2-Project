@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, H1, PrimaryButton } from '../shared/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-// import CreateServer from './CreateServer';
 
 const Game = () => {
 	const [username, setUsername] = useState();
@@ -10,6 +9,7 @@ const Game = () => {
 	const [serverName, setServerName] = useState();
 	const [ready, setReady] = useState(false);
 	const [existingServers, setExistingServers] = useState([]);
+	const [newPopulation, setNewPopulation] = useState(1);
 
 	const history = useHistory();
 
@@ -22,6 +22,9 @@ const Game = () => {
 			role: role,
 		};
 
+		// create an error for if username is null or undefine
+		// set parameter requirements for username
+
 		axios
 			.post('http://localhost:5000/users/add', user)
 			.then((res) => console.log(res.data));
@@ -31,19 +34,22 @@ const Game = () => {
 
 	const createServer = (e) => {
 		e.preventDefault();
+
 		console.log('server name is' + serverName);
 
 		const serverInfo = {
 			servername: serverName,
+			population: 1,
 		};
 
 		axios
 			.post('http://localhost:5000/serverRoom/add', serverInfo)
-			.then((res) => console.log(res.data));
-
-		history.push(
-			'/gamemaster?username=' + username + '&servername=' + serverName
-		);
+			.then((res) => {
+				console.log(res.data);
+				history.push(
+					'/gamemaster?username=' + username + '&servername=' + serverName
+				);
+			});
 	};
 
 	const joinServer = (e) => {
@@ -53,9 +59,19 @@ const Game = () => {
 
 		for (let i = 0; i <= existingServers.length; i++) {
 			if (serverName === existingServers[i]) {
-				history.push(
-					'/player?username=' + username + '&servername=' + serverName
-				);
+				if (existingServers[i].population != 7) {
+					axios
+						.post(
+							'http://localhost:5000/serverRoom/updatePopulation/' + serverName
+						)
+						.then((res) => {
+							console.log(res.data.population);
+						});
+
+					history.push(
+						'/player?username=' + username + '&servername=' + serverName
+					);
+				}
 			} else {
 				console.log('server does not exist');
 			}

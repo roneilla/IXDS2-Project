@@ -7,6 +7,8 @@ import queryString from 'query-string';
 
 import axios from 'axios';
 import SetBudget from '../components/SetBudget';
+import SetFinancialGoal from '../components/SetFinancialGoal';
+import FinancialTracker from '../components/FinancialTracker';
 
 const Player = ({ location }) => {
 	const [username, setUsername] = useState('');
@@ -52,6 +54,10 @@ const Player = ({ location }) => {
 			<div>Salary: </div>
 			<ChooseCareer username={username}></ChooseCareer>
 			<SetBudget username={username}></SetBudget>
+			<SetFinancialGoal username={username}></SetFinancialGoal>
+			<FinancialTracker
+				username={username}
+				roundCount={roundCounter}></FinancialTracker>
 		</Container>
 	);
 };

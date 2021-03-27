@@ -61,6 +61,17 @@ const userSchema = new Schema(
 		budgetTotal: {
 			type: Number,
 		},
+		financialGoal: {
+			type: String,
+		},
+		financialCheckpoints: {
+			first: {
+				type: Number,
+			},
+			second: {
+				type: Number,
+			},
+		},
 	},
 	{
 		timestamps: true,

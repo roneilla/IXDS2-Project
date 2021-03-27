@@ -74,7 +74,7 @@ const SetBudget = (props) => {
 	};
 
 	return (
-		<Container>
+		<div>
 			<h1>Budget</h1>
 			<StyledDiv>
 				<input
@@ -185,7 +185,7 @@ const SetBudget = (props) => {
 			<div>
 				<button onClick={setBudget}>Set Budget</button>
 			</div>
-		</Container>
+		</div>
 	);
 };
 

@@ -63,6 +63,21 @@ router.route('/setBudget/:username').post((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/setFinancialGoal/:username').post((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => {
+			users.financialGoal = req.body.financialGoal;
+			users.financialCheckpoints.first = req.body.firstCheckpoint;
+			users.financialCheckpoints.second = req.body.secondCheckpoint;
+
+			users
+				.save()
+				.then(() => res.json('Financial Goal updated!'))
+				.catch((err) => res.status(400).json('Error: ' + err));
+		})
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/end/:username').delete((req, res) => {
 	User.findOneAndDelete({ username: req.params.username })
 		.then(() => res.json('User deleted.'))

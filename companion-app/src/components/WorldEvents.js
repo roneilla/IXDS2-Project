@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import worldEventsData from '../worldEventsData';
 
@@ -24,6 +24,32 @@ const PastEventsContainer = styled.div`
 	display: flex;
 	flex-direction: column-reverse;
 `;
+let newWorldEventsData;
+
+const shuffle = () => {
+	let array = worldEventsData;
+
+	// stackoverflow code
+	var currentIndex = array.length,
+		temporaryValue,
+		randomIndex;
+
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex) {
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	newWorldEventsData = array;
+};
+
+shuffle();
 
 const WorldEvents = (props) => {
 	// TODO: randomize order of world events
@@ -32,9 +58,9 @@ const WorldEvents = (props) => {
 		<Container>
 			<h1>World Events</h1>
 			<h2>Latest</h2>
-			{/* TODO: add a placeholder for no news yet */}
+			{console.log(newWorldEventsData)}
 			{props.roundCounter > 1
-				? worldEventsData.map((data, index) =>
+				? newWorldEventsData.map((data, index) =>
 						index === props.roundCounter ? (
 							<CurrentNewsContainer key={index}>
 								{data.text}
@@ -42,10 +68,11 @@ const WorldEvents = (props) => {
 						) : null
 				  )
 				: null}
+
 			<h2>Past</h2>
 			<PastEventsContainer>
 				{props.roundCounter > 1
-					? worldEventsData
+					? newWorldEventsData
 							.slice(2, props.roundCounter)
 							.map((data, index) => (
 								<EventCard key={index}>{data.text}</EventCard>

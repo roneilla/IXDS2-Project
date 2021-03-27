@@ -42,14 +42,21 @@ const Game = () => {
 			population: 1,
 		};
 
-		axios
-			.post('http://localhost:5000/serverRoom/add', serverInfo)
-			.then((res) => {
-				console.log(res.data);
-				history.push(
-					'/gamemaster?username=' + username + '&servername=' + serverName
-				);
-			});
+		for (let i = 0; i <= existingServers.length; i++) {
+			if (serverName === existingServers[i]) {
+				alert('server already exists. choose a new name');
+				// TODO clear the input field
+			} else {
+				axios
+					.post('http://localhost:5000/serverRoom/add', serverInfo)
+					.then((res) => {
+						console.log(res.data);
+						history.push(
+							'/gamemaster?username=' + username + '&servername=' + serverName
+						);
+					});
+			}
+		}
 	};
 
 	const joinServer = (e) => {

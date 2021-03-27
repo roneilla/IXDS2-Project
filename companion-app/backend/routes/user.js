@@ -7,6 +7,12 @@ router.route('/').get((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:username').get((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => res.json(users))
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
 	const username = req.body.username;
 	const role = req.body.role;
@@ -19,8 +25,35 @@ router.route('/add').post((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.route('/end/:id').delete((req, res) => {
-	User.findOneAndDelete({ username: req.params.id })
+router.route('/setCareer/:username').post((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => {
+			users.career = req.body.careerName;
+			users.salary = Number(req.body.startingSalary);
+
+			users
+				.save()
+				.then(() => res.json('Career updated!'))
+				.catch((err) => res.status(400).json('Error: ' + err));
+		})
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/setBank/:username').post((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => {
+			users.bank = req.body.bank;
+
+			users
+				.save()
+				.then(() => res.json('Bank updated!'))
+				.catch((err) => res.status(400).json('Error: ' + err));
+		})
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/end/:username').delete((req, res) => {
+	User.findOneAndDelete({ username: req.params.username })
 		.then(() => res.json('User deleted.'))
 		.catch((err) => res.status(400).json('Error: ' + err));
 });

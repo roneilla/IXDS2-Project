@@ -97,7 +97,7 @@ const Gamemaster = ({ location }) => {
 		setRoundCount(roundCount + 1);
 
 		const roundCounter = {
-			roundcounter: roundCount,
+			roundcounter: roundCount + 1,
 		};
 
 		axios

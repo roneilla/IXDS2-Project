@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Container, H1 } from '../shared/global';
+import ChooseCareer from './../components/ChooseCareer';
 
 import queryString from 'query-string';
 
 import axios from 'axios';
+import SetBudget from '../components/SetBudget';
 
-const Player = ({ props, location }) => {
-	// const socket = props.socket;
+const Player = ({ location }) => {
 	const [username, setUsername] = useState('');
 	const [servername, setServername] = useState('');
 	const [roundCounter, setRoundCounter] = useState(0);
 
-	const MINUTE_MS = 100;
+	let currentServerName = '';
+
+	const MINUTE_MS = 500;
 
 	useEffect(() => {
 		const { username, servername } = queryString.parse(location.search);
 
 		setUsername(username);
 		setServername(servername);
+		currentServerName = servername;
 	}, [location.search]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			axios
-				.get('http://localhost:5000/serverRoom/currentRound/test6')
+				.get(
+					'http://localhost:5000/serverRoom/currentRound/' + currentServerName
+				)
 				.then((res) => {
 					setRoundCounter(res.data.roundcounter);
 				});
 
-			// add an error handler
-			console.log(servername);
+			console.log(currentServerName);
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);
@@ -39,10 +44,14 @@ const Player = ({ props, location }) => {
 	return (
 		<Container>
 			<div>Server Name: {servername}</div>
-			<div>Player Name:{username}</div>
-			<div>Current Round: </div>
+			<div>Player Name: {username}</div>
+			<br></br>
+			<div>Current Round </div>
 			<H1> {roundCounter}</H1>
-			{/* Career */}
+			<div>Career: </div>
+			<div>Salary: </div>
+			<ChooseCareer username={username}></ChooseCareer>
+			<SetBudget></SetBudget>
 		</Container>
 	);
 };

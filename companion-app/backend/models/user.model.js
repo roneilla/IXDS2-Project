@@ -20,6 +20,44 @@ const userSchema = new Schema(
 		salary: {
 			type: Number,
 		},
+		bank: {
+			type: Number,
+		},
+		budget: {
+			housing: {
+				type: Number,
+			},
+			utilities: {
+				type: Number,
+			},
+			transportation: {
+				type: Number,
+			},
+			grocery: {
+				type: Number,
+			},
+			entertainment: {
+				type: Number,
+			},
+			restaurants: {
+				type: Number,
+			},
+			pets: {
+				type: Number,
+			},
+			clothing: {
+				type: Number,
+			},
+			health: {
+				type: Number,
+			},
+			household: {
+				type: Number,
+			},
+			personal: {
+				type: Number,
+			},
+		},
 	},
 	{
 		timestamps: true,

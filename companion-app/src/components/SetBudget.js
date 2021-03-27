@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Container } from '../shared/global';
+import axios from 'axios';
 
 const StyledDiv = styled.div`
 	display: flex;
@@ -12,7 +13,9 @@ const StyledDiv = styled.div`
 	}
 `;
 
-const SetBudget = () => {
+const SetBudget = (props) => {
+	const username = props.username;
+
 	const [housing, setHousing] = useState(0);
 	const [utilities, setUtilities] = useState(0);
 	const [transportation, setTransportation] = useState(0);
@@ -42,6 +45,32 @@ const SetBudget = () => {
 			Number(personal);
 
 		setTotal(answer);
+	};
+
+	const setBudget = (e) => {
+		e.preventDefault();
+
+		const budgetInfo = {
+			housing: housing,
+			utilities: utilities,
+			transportation: transportation,
+			grocery: grocery,
+			entertainment: entertainment,
+			restaurants: restaurants,
+			pets: pets,
+			clothing: clothing,
+			health: health,
+			household: household,
+			personal: personal,
+			total: total,
+		};
+
+		axios
+			.post('http://localhost:5000/users/setBudget/' + username, budgetInfo)
+			.then((res) => {
+				console.log(res.data);
+				alert('budget added');
+			});
 	};
 
 	return (
@@ -152,6 +181,9 @@ const SetBudget = () => {
 				<p>household: {household}</p>
 				<p>personal: {personal}</p>
 				<h3> total: {total}</h3>
+			</div>
+			<div>
+				<button onClick={setBudget}>Set Budget</button>
 			</div>
 		</Container>
 	);

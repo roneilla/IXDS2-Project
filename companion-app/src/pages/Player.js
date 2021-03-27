@@ -51,7 +51,7 @@ const Player = ({ location }) => {
 			<div>Career: </div>
 			<div>Salary: </div>
 			<ChooseCareer username={username}></ChooseCareer>
-			<SetBudget></SetBudget>
+			<SetBudget username={username}></SetBudget>
 		</Container>
 	);
 };

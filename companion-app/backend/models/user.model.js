@@ -58,6 +58,9 @@ const userSchema = new Schema(
 				type: Number,
 			},
 		},
+		budgetTotal: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

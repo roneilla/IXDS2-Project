@@ -39,14 +39,25 @@ router.route('/setCareer/:username').post((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.route('/setBank/:username').post((req, res) => {
+router.route('/setBudget/:username').post((req, res) => {
 	User.findOne({ username: req.params.username })
 		.then((users) => {
-			users.bank = req.body.bank;
+			users.budget.housing = req.body.housing;
+			users.budget.utilities = req.body.utilities;
+			users.budget.transporation = req.body.transporation;
+			users.budget.grocery = req.body.grocery;
+			users.budget.entertainment = req.body.entertainment;
+			users.budget.restaurants = req.body.restaurants;
+			users.budget.pets = req.body.pets;
+			users.budget.clothing = req.body.clothing;
+			users.budget.health = req.body.health;
+			users.budget.household = req.body.household;
+			users.budget.personal = req.body.personal;
+			users.budgetTotal = req.body.total;
 
 			users
 				.save()
-				.then(() => res.json('Bank updated!'))
+				.then(() => res.json('Budget updated!'))
 				.catch((err) => res.status(400).json('Error: ' + err));
 		})
 		.catch((err) => res.status(400).json('Error: ' + err));

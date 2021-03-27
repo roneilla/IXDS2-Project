@@ -50,7 +50,7 @@ const App = () => {
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />
 				</DynamicContainer>
-				<Footer />
+				{/* <Footer /> */}
 			</AppContainer>
 		</BrowserRouter>
 	);

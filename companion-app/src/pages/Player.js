@@ -42,6 +42,7 @@ const Player = ({ props, location }) => {
 			<div>Player Name:{username}</div>
 			<div>Current Round: </div>
 			<H1> {roundCounter}</H1>
+			{/* Career */}
 		</Container>
 	);
 };

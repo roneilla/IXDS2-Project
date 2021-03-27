@@ -88,6 +88,7 @@ const Gamemaster = ({ location }) => {
 		const { username, servername } = queryString.parse(location.search);
 		setUsername(username);
 		setServername(servername);
+		console.log(roundCount);
 	}, []);
 
 	const updateDb = (e) => {
@@ -107,8 +108,6 @@ const Gamemaster = ({ location }) => {
 			.then((res) => {
 				console.log(res.data);
 			});
-
-		console.log(roundCount, roundCounter);
 	};
 
 	const endGame = () => {
@@ -129,7 +128,7 @@ const Gamemaster = ({ location }) => {
 			<Grid>
 				<DashboardItem style={{ padding: '0rem' }}>
 					<RoundTrackerContainer>
-						<RoundCounter> {roundCount - 1}</RoundCounter>
+						<RoundCounter> {roundCount}</RoundCounter>
 						<ButtonsContainer>
 							<PrimaryButton onClick={updateDb}>Next Round</PrimaryButton>
 							<PrimaryButton onClick={() => setOpenDialog(true)}>

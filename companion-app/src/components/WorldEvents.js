@@ -32,18 +32,25 @@ const WorldEvents = (props) => {
 		<Container>
 			<h1>World Events</h1>
 			<h2>Latest</h2>
-
-			{worldEventsData.map((data, index) =>
-				index === props.roundCounter - 1 ? (
-					<CurrentNewsContainer key={index}>{data.text}</CurrentNewsContainer>
-				) : null
-			)}
-
+			{/* TODO: add a placeholder for no news yet */}
+			{props.roundCounter > 1
+				? worldEventsData.map((data, index) =>
+						index === props.roundCounter ? (
+							<CurrentNewsContainer key={index}>
+								{data.text}
+							</CurrentNewsContainer>
+						) : null
+				  )
+				: null}
 			<h2>Past</h2>
 			<PastEventsContainer>
-				{worldEventsData.slice(0, props.roundCounter - 1).map((data, index) => (
-					<EventCard key={index}>{data.text}</EventCard>
-				))}
+				{props.roundCounter > 1
+					? worldEventsData
+							.slice(2, props.roundCounter)
+							.map((data, index) => (
+								<EventCard key={index}>{data.text}</EventCard>
+							))
+					: null}
 			</PastEventsContainer>
 		</Container>
 	);

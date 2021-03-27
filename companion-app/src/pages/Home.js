@@ -17,7 +17,9 @@ const Button = styled.button`
 
 const StyledImg = styled.img`
 	margin: 2rem;
-	width: 50%;
+	height: 200px;
+	object-fit: contain;
+	width: auto;
 `;
 
 const StyledContainer = styled(Container)`

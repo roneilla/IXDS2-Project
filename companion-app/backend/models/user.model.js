@@ -14,6 +14,12 @@ const userSchema = new Schema(
 		role: {
 			type: String,
 		},
+		career: {
+			type: String,
+		},
+		salary: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

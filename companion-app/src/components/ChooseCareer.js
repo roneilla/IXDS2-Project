@@ -8,8 +8,6 @@ const ChooseCareer = (props) => {
 	const [chosenCareer, setChosenCareer] = useState();
 	const [chosenSalary, setChosenSalary] = useState();
 
-	let salary;
-
 	const selectOptions = (value) => {
 		careerData
 			.filter(({ careerName }) => careerName === value)

@@ -50,11 +50,11 @@ const Player = ({ location }) => {
 			<br></br>
 			<div>Current Round </div>
 			<H1> {roundCounter}</H1>
-			<div>Career: </div>
+			{/* <div>Career: </div>
 			<div>Salary: </div>
 			<ChooseCareer username={username}></ChooseCareer>
 			<SetBudget username={username}></SetBudget>
-			<SetFinancialGoal username={username}></SetFinancialGoal>
+			<SetFinancialGoal username={username}></SetFinancialGoal> */}
 			<FinancialTracker
 				username={username}
 				roundCount={roundCounter}></FinancialTracker>

@@ -72,6 +72,12 @@ const userSchema = new Schema(
 				type: Number,
 			},
 		},
+		chequing: {
+			type: Number,
+		},
+		savings: {
+			type: Number,
+		},
 	},
 	{
 		timestamps: true,

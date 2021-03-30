@@ -7,11 +7,12 @@ import { Container, H1, H3, P } from './../shared/global';
 const StyledSearchBar = styled.input`
 	font-size: 1rem;
 	padding: 1rem;
-	border: #333 solid 1px;
+	border: #eee solid 1px;
 	position: relative;
 	width: 100%;
 	max-width: 1000px;
 	margin: 0 auto;
+	border-radius: 5px;
 `;
 
 const Header = styled.div`
@@ -32,8 +33,9 @@ const GlossaryCard = styled.div`
 	max-width: 1000px;
 	padding: 1rem;
 	margin: 0.5rem 0;
-	border: 1px solid #333;
+	border: 1px solid #eee;
 	background-color: white;
+	border-radius: 5px;
 `;
 
 const GlossaryPage = (props) => {

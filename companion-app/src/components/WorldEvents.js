@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { CardHeading, HeadingImg, H1 } from '../shared/global';
 import worldEventsData from '../worldEventsData';
+
+import News from './../assets/Icon/News.png';
 
 const Container = styled.div`
 	width: 100%;
@@ -8,13 +11,18 @@ const Container = styled.div`
 `;
 
 const CurrentNewsContainer = styled.div`
-	font-size: 4rem;
+	font-size: 2rem;
 	transition: 2s;
+	background-color: #ecf1f7;
+	color: #4f73b6;
+	padding: 1rem;
+	border-radius: 5px;
+	margin: 1rem 0;
 `;
 
 const EventCard = styled.div`
 	width: 100%;
-	border: #ccc 1px solid;
+	border: #eee 1px solid;
 	padding: 0.5rem;
 	margin: 0.5rem 0;
 	border-radius: 5px;
@@ -24,6 +32,12 @@ const PastEventsContainer = styled.div`
 	display: flex;
 	flex-direction: column-reverse;
 `;
+
+const Label = styled.h3`
+	color: #666;
+	margin: 1rem 0;
+`;
+
 let newWorldEventsData;
 
 const shuffle = () => {
@@ -56,9 +70,11 @@ const WorldEvents = (props) => {
 
 	return (
 		<Container>
-			<h1>World Events</h1>
-			<h2>Latest</h2>
-			{console.log(newWorldEventsData)}
+			<CardHeading>
+				<HeadingImg src={News}></HeadingImg>
+				<H1>World Events</H1>
+			</CardHeading>
+			<Label>Latest</Label>
 			{props.roundCounter > 1
 				? newWorldEventsData.map((data, index) =>
 						index === props.roundCounter ? (
@@ -69,7 +85,7 @@ const WorldEvents = (props) => {
 				  )
 				: null}
 
-			<h2>Past</h2>
+			<Label>Past</Label>
 			<PastEventsContainer>
 				{props.roundCounter > 1
 					? newWorldEventsData

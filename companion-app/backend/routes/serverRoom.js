@@ -12,7 +12,6 @@ router.route('/currentRound/:servername').get((req, res) => {
 		.then((serverRooms) => res.json(serverRooms))
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
-
 router.route('/add').post((req, res) => {
 	const servername = req.body.servername;
 	const population = req.body.population;

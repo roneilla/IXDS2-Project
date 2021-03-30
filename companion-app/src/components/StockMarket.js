@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { P } from '../shared/global';
+import { CardHeading, H1, HeadingImg, P } from '../shared/global';
 import stockMarketData from './../stockMarketData';
+import Stocks from './../assets/Icon/Stocks.png';
 
 const Container = styled.div`
 	width: 100%;
@@ -10,13 +11,34 @@ const Container = styled.div`
 
 const StockCardContainer = styled.div`
 	width: 100%;
-	border: #ccc 1px solid;
+	border: #eee 1px solid;
 	padding: 0.5rem;
 	margin: 0.5rem 0;
 	border-radius: 5px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-column-gap: 2rem;
+`;
+
+const Ticker = styled.div`
+	grid-column: span 2;
+	font-weight: 700;
+`;
+
+const StockName = styled.div`
+	grid-column: span 6;
+`;
+
+const StockPrice = styled.div`
+	grid-column: span 3;
+	font-weight: 700;
+	&::before {
+		content: '$';
+	}
+`;
+
+const ArrowContainer = styled.div`
+	grid-column: span 1;
 `;
 
 const MaterialIcons = styled.div`
@@ -64,10 +86,10 @@ const StockCard = (props) => {
 
 	return (
 		<StockCardContainer>
-			<h3>{props.stockTicker}</h3>
-			<h3>{props.stockName}</h3>
-			<p>{stockPrice}</p>
-			<span>{arrow}</span>
+			<Ticker>{props.stockTicker}</Ticker>
+			<StockName>{props.stockName}</StockName>
+			<StockPrice>{stockPrice}</StockPrice>
+			<ArrowContainer>{arrow}</ArrowContainer>
 		</StockCardContainer>
 	);
 };
@@ -85,7 +107,10 @@ const StockMarket = (props) => {
 
 	return (
 		<Container>
-			<h1>Stock Market</h1>
+			<CardHeading>
+				<HeadingImg src={Stocks}></HeadingImg>
+				<H1>Stock Market</H1>
+			</CardHeading>
 			{stocks}
 		</Container>
 	);

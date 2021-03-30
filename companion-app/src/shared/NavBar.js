@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { FlexBetween } from './global';
+import { FlexBetween, PrimaryButton } from './global';
 import GlossarySearch from './../components/GlossarySearch';
 import GuidebookModal from './../components/GuidebookModal';
-import Glyph from './../assets/glyph.svg';
+import Glyph from './../assets/Glyph.png';
 
 const Nav = styled.nav`
 	width: 100%;
 	padding: 1rem 2rem;
-	background-color: #f9f1ea;
+	background-color: transparent;
 	display: flex;
 	justify-content: space-between;
 `;
@@ -18,7 +18,7 @@ const NavMenu = styled.ul`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 50%;
+	width: 40%;
 `;
 
 const NavItem = styled.li`
@@ -48,9 +48,6 @@ const NavBar = () => {
 
 				<NavMenu>
 					<NavItem>
-						<StyledLink to="/">Play</StyledLink>
-					</NavItem>
-					<NavItem>
 						<StyledLink to="/guidebook">Guidebook</StyledLink>
 					</NavItem>
 					<NavItem>
@@ -61,6 +58,11 @@ const NavBar = () => {
 					</NavItem>
 					<NavItem>
 						<StyledLink to="/help">Help</StyledLink>
+					</NavItem>
+					<NavItem>
+						<StyledLink to="/game">
+							<PrimaryButton>Play</PrimaryButton>
+						</StyledLink>
 					</NavItem>
 				</NavMenu>
 			</Nav>

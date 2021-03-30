@@ -1,7 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { Container, H1, PrimaryButton } from '../shared/global';
+import {
+	ColumnFlex,
+	Container,
+	H1,
+	PrimaryButton,
+	TextInput,
+	Button,
+	FlexBetween,
+} from '../shared/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+
+import Gamemaster from './../assets/gamemaster.png';
+import Player from './../assets/player.png';
+
+const PlayerButton = styled(Button)`
+	background-color: #ecf1f7;
+	text-align: center;
+	vertical-align: center;
+	width: 250px;
+	margin: 1rem;
+	font-size: 1.5rem;
+	font-weight: 700;
+`;
+
+const GamemasterButton = styled(Button)`
+	background-color: #fef9e6;
+	text-align: center;
+	vertical-align: center;
+	width: 250px;
+	margin: 1rem;
+	font-size: 1.5rem;
+	font-weight: 700;
+`;
+
+const FlexContainer = styled.div`
+	display: flex;
+`;
 
 const Game = () => {
 	const [username, setUsername] = useState();
@@ -103,61 +139,61 @@ const Game = () => {
 	return (
 		<Container>
 			{ready === false ? (
-				<div>
-					<H1>What is your role?</H1>
+				<ColumnFlex>
+					<H1>What would you like to be called?</H1>
 
-					<label htmlFor="username">Username</label>
-					<input
+					<TextInput
 						placeholder="Write your username here"
 						onChange={(e) => {
 							setUsername(e.target.value);
-						}}></input>
+						}}></TextInput>
+					<H1>What is your role?</H1>
+					<FlexContainer>
+						<PlayerButton
+							onClick={(e) => {
+								setRole('player');
+							}}>
+							<ColumnFlex>
+								<img src={Player}></img>
+								<span style={{ color: '#4f73b6' }}>Player</span>
+							</ColumnFlex>
+						</PlayerButton>
+						<GamemasterButton
+							onClick={(e) => {
+								setRole('gamemaster');
+							}}>
+							<ColumnFlex>
+								<img src={Gamemaster}></img>
+								<span style={{ color: '#f0c418' }}>Gamemaster</span>
+							</ColumnFlex>
+						</GamemasterButton>
+					</FlexContainer>
 
-					<div
-						onChange={(e) => {
-							setRole(e.target.value);
-						}}>
-						<input type="radio" id="player" name="role" value="player"></input>
-						<label htmlFor="player">Player</label>
-						<br></br>
-
-						<input
-							type="radio"
-							id="gamemaster"
-							name="role"
-							value="gamemaster"></input>
-						<label htmlFor="gamemaster">Gamemaster</label>
-						<br></br>
-					</div>
 					<PrimaryButton onClick={beginGame}>Submit</PrimaryButton>
-				</div>
+				</ColumnFlex>
 			) : (
 				<div>
 					{role === 'player' ? (
-						<span>
+						<ColumnFlex>
 							<H1>Join Server</H1>
-							<label htmlFor="username">Server</label>
-							<input
+							<TextInput
 								placeholder="Find a Server"
 								onChange={(e) => {
 									setServerName(e.target.value);
-								}}></input>
-
-							<button onClick={joinServer}>Join</button>
-						</span>
+								}}></TextInput>
+							<PrimaryButton onClick={joinServer}>Join</PrimaryButton>
+						</ColumnFlex>
 					) : (
-						<span>
+						<ColumnFlex>
 							<H1>Host Server</H1>
-							<label htmlFor="servername">Server</label>
-							<input
+							<TextInput
 								name="servername"
 								placeholder="Create a Server"
 								onChange={(e) => {
 									setServerName(e.target.value);
-								}}></input>
-
-							<button onClick={createServer}>Create Room</button>
-						</span>
+								}}></TextInput>
+							<PrimaryButton onClick={createServer}>Create Room</PrimaryButton>
+						</ColumnFlex>
 					)}
 				</div>
 			)}

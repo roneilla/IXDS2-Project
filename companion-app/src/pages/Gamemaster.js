@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container, P, PrimaryButton, Subtitle } from '../shared/global';
+import {
+	Container,
+	LargeP,
+	PrimaryButton,
+	ClearButton,
+} from '../shared/global';
 import WorldEvents from '../components/WorldEvents';
 import StockMarket from '../components/StockMarket';
 import axios from 'axios';
@@ -17,19 +22,19 @@ const Grid = styled.div`
 const DashboardItem = styled.div`
 	grid-column: span 1;
 	padding: 1rem;
-	border: #333 1px solid;
 	background-color: white;
 	margin: 1rem 0;
 	overflow: auto;
 	height: calc(100vh - 75px - 50px - 2rem);
+	border-radius: 5px;
 `;
 
 const RoundCounter = styled.h1`
-	font-size: 5rem;
+	font-size: 7rem;
 	margin: 2rem 0;
 	font-family: ohno-blazeface, sans-serif;
 	font-weight: 700;
-	color: white;
+	color: #f0c418;
 `;
 
 const Modal = styled.div`
@@ -48,8 +53,8 @@ const Modal = styled.div`
 `;
 
 const RoundTrackerContainer = styled.div`
-	background-color: #fac969;
-	color: #fff;
+	background-color: #fef9e6;
+	color: #f0c418;
 	width: 100%;
 	padding: 1rem;
 	display: flex;
@@ -74,6 +79,15 @@ const ButtonsContainer = styled.div`
 	& ${PrimaryButton} {
 		margin: 1rem 0;
 	}
+`;
+
+const GameStrip = styled.div`
+	width: 100%;
+	background-color: #f0c418;
+	display: flex;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
+	font-size: 1.25rem;
 `;
 
 const Gamemaster = ({ location }) => {
@@ -125,17 +139,25 @@ const Gamemaster = ({ location }) => {
 			style={{
 				padding: '0',
 			}}>
+			<GameStrip>
+				<span>server room: {servername}</span>
+				<span style={{ fontWeight: '700' }}>{username}'s dashboard</span>
+				<span>
+					population
+					{/* TOD: get population via axios */}
+				</span>
+			</GameStrip>
 			<Grid>
 				<DashboardItem style={{ padding: '0rem' }}>
 					<RoundTrackerContainer>
+						<LargeP> Round Tracker</LargeP>
 						<RoundCounter> {roundCount}</RoundCounter>
 						<ButtonsContainer>
 							<PrimaryButton onClick={updateDb}>Next Round</PrimaryButton>
-							<PrimaryButton onClick={() => setOpenDialog(true)}>
+							<ClearButton onClick={() => setOpenDialog(true)}>
 								End Game
-							</PrimaryButton>
+							</ClearButton>
 						</ButtonsContainer>
-
 						{openDialog === true ? (
 							<Modal>
 								<h2>Are you sure you want to end the game?</h2>

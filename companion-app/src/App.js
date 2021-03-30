@@ -24,7 +24,7 @@ import Game from './pages/Game';
 
 const AppContainer = styled.div`
 	display: grid;
-	grid-template-rows: 75px 1fr 50px;
+	grid-template-rows: 75px 1fr;
 	height: 100vh;
 	overflow: hidden;
 `;

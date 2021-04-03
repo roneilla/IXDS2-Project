@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container, P } from './../shared/global';
-import Logo from './../assets/logo.svg';
+import { Container, P } from '../shared/global';
+import Logo from '../assets/logo.svg';
 
 const Header = styled.div`
 	padding: 2rem 0 5rem 0;

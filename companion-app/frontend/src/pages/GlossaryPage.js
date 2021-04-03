@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import glossary from './../glossary';
+import glossary from '../glossary';
 
-import { Container, H1, H3, P } from './../shared/global';
+import { Container, H1, H3, P } from '../shared/global';
 
 const StyledSearchBar = styled.input`
 	font-size: 1rem;

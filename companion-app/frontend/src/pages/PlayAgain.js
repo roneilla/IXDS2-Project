@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, PrimaryButton } from './../shared/global';
+import { Container, PrimaryButton } from '../shared/global';
 import { useHistory } from 'react-router-dom';
 
 const PlayAgain = () => {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CardHeading, HeadingImg, H1 } from '../shared/global';
 import worldEventsData from '../worldEventsData';
 
-import News from './../assets/Icon/News.png';
+import News from '../assets/Icon/News.png';
 
 const Container = styled.div`
 	width: 100%;

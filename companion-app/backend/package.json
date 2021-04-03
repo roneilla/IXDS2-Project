@@ -4,7 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
   },
   "keywords": [],
   "author": "",
@@ -15,7 +18,7 @@
     "express": "^4.17.1",
     "http": "0.0.1-security",
     "mongodb": "^3.6.5",
-    "mongoose": "^5.12.2",
+    "mongoose": "^5.12.3",
     "path": "^0.12.7"
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FlexBetween } from '../shared/global';
-import glossary from './../glossary';
+import glossary from '../glossary';
 import { GrFormClose } from 'react-icons/gr';
 
 const GlossaryContainer = styled.div`

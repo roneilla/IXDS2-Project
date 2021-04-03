@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, Subtitle, PrimaryButtonLarge } from '../shared/global';
 import { Link } from 'react-router-dom';
-import Logo from './../assets/logo.svg';
+import Logo from '../assets/logo.svg';
 
 const StyledImg = styled.img`
 	margin: 2rem;

@@ -10,7 +10,7 @@ import {
 	P,
 	H4,
 } from '../shared/global';
-import ChooseCareer from './../components/ChooseCareer';
+import ChooseCareer from '../components/ChooseCareer';
 
 import queryString from 'query-string';
 
@@ -19,13 +19,13 @@ import SetBudget from '../components/SetBudget';
 import SetFinancialGoal from '../components/SetFinancialGoal';
 import FinancialTracker from '../components/FinancialTracker';
 
-import Career from './../assets/Icon/Career.png';
-import Bank from './../assets/Icon/Bank.png';
-import Goal from './../assets/Icon/Goal.png';
-import Budget from './../assets/Icon/Budget.png';
-import Stocks from './../assets/Icon/Stocks.png';
-import Calendar from './../assets/Icon/Calendar.png';
-import CheckImg from './../assets/Icon/Check.svg';
+import Career from '../assets/Icon/Career.png';
+import Bank from '../assets/Icon/Bank.png';
+import Goal from '../assets/Icon/Goal.png';
+import Budget from '../assets/Icon/Budget.png';
+import Stocks from '../assets/Icon/Stocks.png';
+import Calendar from '../assets/Icon/Calendar.png';
+import CheckImg from '../assets/Icon/Check.svg';
 
 const SetupCard = styled.div`
 	display: flex;

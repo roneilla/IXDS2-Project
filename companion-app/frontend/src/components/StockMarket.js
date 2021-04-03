@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { CardHeading, H1, HeadingImg, P } from '../shared/global';
-import stockMarketData from './../stockMarketData';
-import Stocks from './../assets/Icon/Stocks.png';
+import stockMarketData from '../stockMarketData';
+import Stocks from '../assets/Icon/Stocks.png';
 
 const Container = styled.div`
 	width: 100%;

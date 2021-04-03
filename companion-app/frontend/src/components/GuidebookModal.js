@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, PrimaryButton } from './../shared/global';
+import { Container, PrimaryButton } from '../shared/global';
 import styled from 'styled-components';
 import Collapsible from 'react-collapsible';
 import { GrFormClose } from 'react-icons/gr';

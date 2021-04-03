@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { FlexBetween, PrimaryButton } from './global';
-import GlossarySearch from './../components/GlossarySearch';
-import GuidebookModal from './../components/GuidebookModal';
-import Glyph from './../assets/Glyph.png';
+import GlossarySearch from '../components/GlossarySearch';
+import GuidebookModal from '../components/GuidebookModal';
+import Glyph from '../assets/Glyph.png';
 
 const Nav = styled.nav`
 	width: 100%;

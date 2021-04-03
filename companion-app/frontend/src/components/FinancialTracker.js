@@ -11,7 +11,7 @@ import {
 	PrimaryButtonOutline,
 	SmallOutlineButton,
 	TextInput,
-} from './../shared/global';
+} from '../shared/global';
 
 const InputRow = styled.div`
 	display: flex;

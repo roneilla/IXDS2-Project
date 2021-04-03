@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container } from './../shared/global';
+import { Container } from '../shared/global';
 import Collapsible from 'react-collapsible';
 
 const Help = () => {

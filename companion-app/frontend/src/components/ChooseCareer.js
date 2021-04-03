@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ColumnFlex, H3, P, PrimaryButton, Select } from '../shared/global';
 import axios from 'axios';
-import careerData from './../careerData';
+import careerData from '../careerData';
 import styled from 'styled-components';
 
 const CareerCard = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import financialGoalData from './../financialGoalData';
+import financialGoalData from '../financialGoalData';
 
 const SetFinancialGoal = (props) => {
 	const username = props.username;

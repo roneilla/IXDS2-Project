@@ -12,8 +12,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Gamemaster from './../assets/gamemaster.png';
-import Player from './../assets/player.png';
+import Gamemaster from '../assets/gamemaster.png';
+import Player from '../assets/player.png';
 
 const PlayerButton = styled(Button)`
 	background-color: #ecf1f7;

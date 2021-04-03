@@ -146,7 +146,7 @@ const Gamemaster = ({ location }) => {
 				<span>Server: {servername}</span>
 				<span style={{ fontWeight: '700' }}>{username}'s Dashboard</span>
 				<span>
-					Population:
+					population in room:
 					{/* TOD: get population via axios */}
 				</span>
 			</GameStrip>

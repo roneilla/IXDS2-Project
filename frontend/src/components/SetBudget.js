@@ -105,7 +105,10 @@ const SetBudget = (props) => {
 		};
 
 		axios
-			.post('http://localhost:5000/users/setBudget/' + username, budgetInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/setBudget/' + username,
+				budgetInfo
+			)
 			.then((res) => {
 				console.log(res.data);
 				alert('budget added');

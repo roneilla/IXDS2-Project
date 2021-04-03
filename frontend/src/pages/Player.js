@@ -147,36 +147,39 @@ const Player = ({ location }) => {
 	}, [location.search]);
 
 	useEffect(() => {
-		axios.get('http://localhost:5000/users/' + currentUsername).then((res) => {
-			if (res.data.career != null) {
-				setCareer(true);
-				setMySalary(res.data.salary);
-			}
+		axios
+			.get('https://the-price-of-life.herokuapp.com/users/' + currentUsername)
+			.then((res) => {
+				if (res.data.career != null) {
+					setCareer(true);
+					setMySalary(res.data.salary);
+				}
 
-			if (res.data.budget != null) {
-				setBudget(true);
-				setMyBudget(res.data.budget);
-			}
+				if (res.data.budget != null) {
+					setBudget(true);
+					setMyBudget(res.data.budget);
+				}
 
-			if (res.data.financialGoal != null) {
-				setGoal(true);
-				setMyGoal(res.data.financialGoal);
-				setMyFirstCheckpoint(res.data.financialCheckpoints.first);
-				setMySecondCheckpoint(res.data.financialCheckpoints.second);
-				setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
-			}
+				if (res.data.financialGoal != null) {
+					setGoal(true);
+					setMyGoal(res.data.financialGoal);
+					setMyFirstCheckpoint(res.data.financialCheckpoints.first);
+					setMySecondCheckpoint(res.data.financialCheckpoints.second);
+					setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
+				}
 
-			setMyCareer(res.data.career);
-			setMyChequing(res.data.chequing);
-			setMySavings(res.data.savings);
-		});
+				setMyCareer(res.data.career);
+				setMyChequing(res.data.chequing);
+				setMySavings(res.data.savings);
+			});
 	}, []);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			axios
 				.get(
-					'http://localhost:5000/serverRoom/currentRound/' + currentServerName
+					'https://the-price-of-life.herokuapp.com/serverRoom/currentRound/' +
+						currentServerName
 				)
 				.then((res) => {
 					setRoundCounter(res.data.roundcounter);
@@ -184,7 +187,7 @@ const Player = ({ location }) => {
 
 			console.log(currentServerName);
 			axios
-				.get('http://localhost:5000/users/' + currentUsername)
+				.get('https://the-price-of-life.herokuapp.com/users/' + currentUsername)
 				.then((res) => {
 					setMyChequing(res.data.chequing);
 					setMySavings(res.data.savings);

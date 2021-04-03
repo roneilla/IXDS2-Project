@@ -35,7 +35,10 @@ const ChooseCareer = (props) => {
 		};
 
 		axios
-			.post('http://localhost:5000/users/setCareer/' + username, careerInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/setCareer/' + username,
+				careerInfo
+			)
 			.then((res) => {
 				console.log(res.data);
 				alert('career added');

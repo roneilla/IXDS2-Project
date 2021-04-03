@@ -62,7 +62,7 @@ const Game = () => {
 		// set parameter requirements for username
 
 		axios
-			.post('http://localhost:5000/users/add', user)
+			.post('https://the-price-of-life.herokuapp.com/users/add', user)
 			.then((res) => console.log(res.data));
 
 		setReady(true);
@@ -84,7 +84,10 @@ const Game = () => {
 				// TODO clear the input field
 			} else {
 				axios
-					.post('http://localhost:5000/serverRoom/add', serverInfo)
+					.post(
+						'https://the-price-of-life.herokuapp.com/serverRoom/add',
+						serverInfo
+					)
 					.then((res) => {
 						console.log(res.data);
 						history.push(
@@ -105,7 +108,8 @@ const Game = () => {
 				if (existingServers[i].population !== 7) {
 					axios
 						.post(
-							'http://localhost:5000/serverRoom/updatePopulation/' + serverName
+							'https://the-price-of-life.herokuapp.com/serverRoom/updatePopulation/' +
+								serverName
 						)
 						.then((res) => {
 							console.log(res.data.population);
@@ -125,7 +129,7 @@ const Game = () => {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:5000/serverRoom')
+			.get('https://the-price-of-life.herokuapp.com/serverRoom')
 			.then((response) => {
 				if (response.data.length > 0) {
 					setExistingServers(response.data.map((server) => server.servername));

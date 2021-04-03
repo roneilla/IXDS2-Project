@@ -11,6 +11,7 @@ export const FlexBetween = styled.div`
 	justify-content: space-between;
 	width: 100%;
 	align-items: center;
+	flex-direction: row;
 `;
 
 export const ColumnFlex = styled.div`
@@ -69,14 +70,25 @@ export const Button = styled.button`
 	border-radius: 5px;
 	font-size: 1rem;
 	padding: 0.5rem 1rem;
-	letter-spacing: 1px;
-
+	letter-spacing: 0.5px;
+	margin: 0.25rem;
+	font-weight: 600;
 	&:hover {
 		cursor: pointer;
 	}
 `;
 
+export const SmallButton = styled(Button)`
+	font-size: 0.75rem;
+	padding: 0.25rem 0.5rem;
+`;
+
 export const OutlineButton = styled(Button)`
+	border: 2px solid #111;
+	background: transparent;
+`;
+
+export const SmallOutlineButton = styled(SmallButton)`
 	border: 2px solid #111;
 	background: transparent;
 `;
@@ -115,6 +127,10 @@ export const PrimaryButtonOutline = styled(OutlineButton)`
 	color: '#111';
 `;
 
+export const SmallPrimaryButtonOutline = styled(SmallOutlineButton)`
+	color: '#111';
+`;
+
 export const TextInput = styled.input`
 	background-color: #fff;
 	border: #eee 1px solid;
@@ -137,4 +153,15 @@ export const CardHeading = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+`;
+
+export const Select = styled.select`
+	background-color: #fff;
+	border: #eee 1px solid;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 600px;
+	font-size: 1rem;
+	margin: 1rem;
 `;

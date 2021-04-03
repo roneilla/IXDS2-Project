@@ -72,9 +72,6 @@ const GlossarySearch = (props) => {
 				<p>{data.definition}</p>
 			</GlossaryItemContainer>
 		));
-
-	console.log(glossaryItem);
-
 	return (
 		<GlossaryContainer>
 			<StyledSearchBar

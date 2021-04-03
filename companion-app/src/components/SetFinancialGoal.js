@@ -8,6 +8,7 @@ const SetFinancialGoal = (props) => {
 	const [financialGoal, setFinancialGoal] = useState();
 	const [firstCheckpoint, setFirstCheckpoint] = useState(0);
 	const [secondCheckpoint, setSecondCheckpoint] = useState(0);
+	const [goalCheckpoint, setGoalCheckpoint] = useState(0);
 
 	const findGoal = (value) => {
 		financialGoalData
@@ -16,6 +17,7 @@ const SetFinancialGoal = (props) => {
 				setFinancialGoal(data.goal);
 				setFirstCheckpoint(data.firstCheckpoint);
 				setSecondCheckpoint(data.secondCheckpoint);
+				setGoalCheckpoint(data.goalCheckpoint);
 			});
 	};
 
@@ -26,6 +28,7 @@ const SetFinancialGoal = (props) => {
 			financialGoal: financialGoal,
 			firstCheckpoint: firstCheckpoint,
 			secondCheckpoint: secondCheckpoint,
+			goalCheckpoint: goalCheckpoint,
 		};
 
 		axios
@@ -52,6 +55,8 @@ const SetFinancialGoal = (props) => {
 				{firstCheckpoint}
 				<br></br>
 				{secondCheckpoint}
+				<br></br>
+				{goalCheckpoint}
 			</h1>
 		</div>
 	);

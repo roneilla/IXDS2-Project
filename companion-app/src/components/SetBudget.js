@@ -1,16 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Container } from '../shared/global';
+import {
+	ColumnFlex,
+	FlexBetween,
+	PrimaryButton,
+	TextInput,
+	P,
+	H3,
+	H4,
+} from '../shared/global';
 import axios from 'axios';
+
+const StyledTextInput = styled(TextInput)`
+	width: 200px;
+	font-size: 1rem;
+	margin: 0.5rem 0.5rem 0.5rem 2rem;
+	padding: 0.125rem 0.5rem;
+`;
 
 const StyledDiv = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: stretch;
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 5px;
+	margin: 1rem 0;
 
 	& > * {
 		margin: 0.2rem 0;
 	}
+`;
+
+const InputRow = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px #eee solid;
+	border-radius: 5px;
+	padding: 0 1rem;
+`;
+
+const StyledTotal = styled.div`
+	background-color: #fff;
+	padding: 1rem;
+	border-radius: 5px;
+	margin: 1rem 0;
+`;
+
+const Summary = styled.div`
+	margin-left: 3rem;
 `;
 
 const SetBudget = (props) => {
@@ -74,118 +113,154 @@ const SetBudget = (props) => {
 	};
 
 	return (
-		<div>
-			<h1>Budget</h1>
-			<StyledDiv>
-				<input
-					min="0"
-					type="number"
-					name="Housing"
-					placeholder="Housing"
-					onChange={(e) => {
-						setHousing(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Utilities"
-					placeholder="Utilities"
-					onChange={(e) => {
-						setUtilities(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Transportation"
-					placeholder="Transportation"
-					onChange={(e) => {
-						setTransportation(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Grocery"
-					placeholder="Grocery"
-					onChange={(e) => {
-						setGrocery(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Entertainment"
-					placeholder="Entertainment"
-					onChange={(e) => {
-						setEntertainment(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Restaurants"
-					placeholder="Restaurants"
-					onChange={(e) => {
-						setRestaurants(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Pets"
-					placeholder="Pets"
-					onChange={(e) => {
-						setPets(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Clothing"
-					placeholder="Clothing"
-					onChange={(e) => {
-						setClothing(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Health"
-					placeholder="Health"
-					onChange={(e) => {
-						setHealth(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Household"
-					placeholder="Household"
-					onChange={(e) => {
-						setHousehold(e.target.value);
-					}}></input>
-				<input
-					min="0"
-					type="number"
-					name="Personal"
-					placeholder="Personal"
-					onChange={(e) => {
-						setPersonal(e.target.value);
-					}}></input>
-				<button onClick={calculateTotal}>Calculate</button>
-			</StyledDiv>
+		<ColumnFlex>
+			<FlexBetween>
+				<StyledDiv>
+					<InputRow>
+						<H4>Housing</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Housing"
+							placeholder="$"
+							onChange={(e) => {
+								setHousing(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Utilities</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Utilities"
+							placeholder="$"
+							onChange={(e) => {
+								setUtilities(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Transportation</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Transportation"
+							placeholder="$"
+							onChange={(e) => {
+								setTransportation(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Grocery</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Grocery"
+							placeholder="$"
+							onChange={(e) => {
+								setGrocery(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Entertainment</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Entertainment"
+							placeholder="$"
+							onChange={(e) => {
+								setEntertainment(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Restaurants</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Restaurants"
+							placeholder="$"
+							onChange={(e) => {
+								setRestaurants(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Pets</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Pets"
+							placeholder="$"
+							onChange={(e) => {
+								setPets(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Clothing</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Clothing"
+							placeholder="$"
+							onChange={(e) => {
+								setClothing(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Health</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Health"
+							placeholder="$"
+							onChange={(e) => {
+								setHealth(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Household</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Household"
+							placeholder="$"
+							onChange={(e) => {
+								setHousehold(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+					<InputRow>
+						<H4>Personal</H4>
+						<StyledTextInput
+							min="0"
+							type="number"
+							name="Personal"
+							placeholder="$"
+							onChange={(e) => {
+								setPersonal(e.target.value);
+							}}></StyledTextInput>
+					</InputRow>
+				</StyledDiv>
 
-			<div>
-				<p>housing: {housing}</p>
-				<p>utilities: {utilities}</p>
-				<p>transportation: {transportation}</p>
-				<p>grocery: {grocery}</p>
-				<p>entertainment: {entertainment}</p>
-				<p>restaurants: {restaurants}</p>
-				<p>pets: {pets}</p>
-				<p>clothing: {clothing}</p>
-				<p>health: {health}</p>
-				<p>household: {household}</p>
-				<p>personal: {personal}</p>
-				<h3> total: {total}</h3>
-			</div>
-			<div>
-				<button onClick={setBudget}>Set Budget</button>
-			</div>
-		</div>
+				<Summary>
+					{/* <StyledP>housing: {housing}</StyledP>
+					<StyledP>utilities: {utilities}</StyledP>
+					<StyledP>transportation: {transportation}</StyledP>
+					<StyledP>grocery: {grocery}</StyledP>
+					<StyledP>entertainment: {entertainment}</StyledP>
+					<StyledP>restaurants: {restaurants}</StyledP>
+					<StyledP>pets: {pets}</StyledP>
+					<StyledP>clothing: {clothing}</StyledP>
+					<StyledP>health: {health}</StyledP>
+					<StyledP>household: {household}</StyledP>
+					<StyledP>personal: {personal}</StyledP> */}
+					<StyledTotal>
+						<H3> Total: {total}</H3>
+					</StyledTotal>
+					<ColumnFlex>
+						<PrimaryButton onClick={calculateTotal}>Calculate</PrimaryButton>
+						<PrimaryButton onClick={setBudget}>Set Budget</PrimaryButton>
+					</ColumnFlex>
+				</Summary>
+			</FlexBetween>
+		</ColumnFlex>
 	);
 };
 

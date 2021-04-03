@@ -71,6 +71,9 @@ const userSchema = new Schema(
 			second: {
 				type: Number,
 			},
+			goal: {
+				type: Number,
+			},
 		},
 		chequing: {
 			type: Number,

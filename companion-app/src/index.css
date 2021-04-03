@@ -35,3 +35,7 @@
 .Collapsible__contentInner {
 	margin-top: 1rem;
 }
+
+.dollar::before {
+	content: '$';
+}

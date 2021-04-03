@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import { Container } from '../shared/global';
+import { ColumnFlex, H3, P, PrimaryButton, Select } from '../shared/global';
 import axios from 'axios';
 import careerData from './../careerData';
+import styled from 'styled-components';
+
+const CareerCard = styled.div`
+	border-radius: 5px;
+	background-color: #4f73b6;
+	color: #fff;
+	padding: 1rem;
+	margin: 1rem 0;
+`;
 
 const ChooseCareer = (props) => {
 	const username = props.username;
@@ -34,8 +43,8 @@ const ChooseCareer = (props) => {
 	};
 
 	return (
-		<div>
-			<select
+		<ColumnFlex>
+			<Select
 				onChange={(e) => {
 					selectOptions(e.target.value);
 				}}
@@ -46,14 +55,19 @@ const ChooseCareer = (props) => {
 						{data.careerName}
 					</option>
 				))}
-			</select>
+			</Select>
 
-			<p>{chosenCareer}</p>
+			{chosenCareer != null ? (
+				<CareerCard>
+					<H3>{chosenCareer}</H3>
+					<P>{chosenSalary}</P>
+				</CareerCard>
+			) : null}
 
-			<p>{chosenSalary}</p>
-
-			<button onClick={pickCareer}>Pick Career</button>
-		</div>
+			<PrimaryButton style={{ margin: '1rem 0' }} onClick={pickCareer}>
+				Pick Career
+			</PrimaryButton>
+		</ColumnFlex>
 	);
 };
 

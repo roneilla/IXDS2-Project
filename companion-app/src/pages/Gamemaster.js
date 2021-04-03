@@ -140,10 +140,10 @@ const Gamemaster = ({ location }) => {
 				padding: '0',
 			}}>
 			<GameStrip>
-				<span>server room: {servername}</span>
-				<span style={{ fontWeight: '700' }}>{username}'s dashboard</span>
+				<span>Server: {servername}</span>
+				<span style={{ fontWeight: '700' }}>{username}'s Dashboard</span>
 				<span>
-					population
+					Population:
 					{/* TOD: get population via axios */}
 				</span>
 			</GameStrip>

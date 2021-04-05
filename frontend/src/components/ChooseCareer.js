@@ -63,7 +63,7 @@ const ChooseCareer = (props) => {
 			{chosenCareer != null ? (
 				<CareerCard>
 					<H3>{chosenCareer}</H3>
-					<P>{chosenSalary}</P>
+					<P className="dollar">{chosenSalary}</P>
 				</CareerCard>
 			) : null}
 

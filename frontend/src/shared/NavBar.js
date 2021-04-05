@@ -41,7 +41,10 @@ const NavBar = () => {
 
 	if (location.pathname !== '/player' && location.pathname !== '/gamemaster') {
 		return (
-			<Nav>
+			<Nav
+				style={
+					location.pathname === '/' ? { backgroundColor: '#f0c418' } : null
+				}>
 				<StyledLink to="/">
 					<StyledImg src={Glyph} alt="Logo"></StyledImg>
 				</StyledLink>

@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import financialGoalData from './../financialGoalData';
+import { PrimaryButton, TextInput, H4, ColumnFlex, P } from '../shared/global';
+
+const GoalRow = styled.div`
+	display: flex;
+	flex-direction: column;
+	border: 1px #eee solid;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	margin: 0.25rem 0;
+	background-color: #fff;
+	width: 200px;
+`;
 
 const SetFinancialGoal = (props) => {
 	const username = props.username;
@@ -44,22 +57,29 @@ const SetFinancialGoal = (props) => {
 	};
 
 	return (
-		<div>
-			<h1>set financial goal</h1>
-			<p>type the code exactly as you see it</p>
-			<input type="text" onChange={(e) => findGoal(e.target.value)}></input>
-			<button onClick={setGoal}>Set Goal</button>
+		<ColumnFlex>
+			<P>Type the code exactly as you see it</P>
+			<TextInput
+				type="text"
+				onChange={(e) => findGoal(e.target.value)}></TextInput>
 
-			<h1>
-				{financialGoal}
-				<br></br>
-				{firstCheckpoint}
-				<br></br>
-				{secondCheckpoint}
-				<br></br>
-				{goalCheckpoint}
-			</h1>
-		</div>
+			<span style={{ margin: '2rem 0' }}>
+				<GoalRow style={{ backgroundColor: '#FEF9E6' }}>
+					<H4>{financialGoal}</H4>
+					<P className="dollar">{goalCheckpoint}</P>
+				</GoalRow>
+				<GoalRow>
+					<H4>Checkpoint 1</H4>
+					<P className="dollar">{firstCheckpoint}</P>
+				</GoalRow>
+				<GoalRow>
+					<H4>Checkpoint 2</H4>
+					<P className="dollar">{secondCheckpoint}</P>
+				</GoalRow>
+			</span>
+
+			<PrimaryButton onClick={setGoal}>Set Goal</PrimaryButton>
+		</ColumnFlex>
 	);
 };
 

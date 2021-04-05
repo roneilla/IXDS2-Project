@@ -49,7 +49,7 @@ const StockCard = (props) => {
 	const [stockPrice, setStockPrice] = useState(0);
 	const previousPriceRef = useRef();
 
-	const MINUTE_MS = 1000; // 5 minutes is 300000
+	const MINUTE_MS = 300000; // 5 minutes is 300000
 
 	let growth = Math.floor(props.monthlyGrowth * props.roundCounter);
 

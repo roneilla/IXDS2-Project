@@ -154,6 +154,11 @@ const Game = () => {
 					<H1>What is your role?</H1>
 					<FlexContainer>
 						<PlayerButton
+							style={
+								role === 'player'
+									? { border: '2px solid #4F73B6' }
+									: { border: 'none' }
+							}
 							onClick={(e) => {
 								setRole('player');
 							}}>
@@ -163,6 +168,11 @@ const Game = () => {
 							</ColumnFlex>
 						</PlayerButton>
 						<GamemasterButton
+							style={
+								role === 'gamemaster'
+									? { border: '2px solid #F0C418' }
+									: { border: 'none' }
+							}
 							onClick={(e) => {
 								setRole('gamemaster');
 							}}>

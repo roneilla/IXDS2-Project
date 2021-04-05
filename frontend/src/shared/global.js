@@ -23,25 +23,25 @@ export const ColumnFlex = styled.div`
 export const H1 = styled.h1`
 	font-family: freight-macro-pro, serif;
 	font-size: 2rem;
-	font-weight: 700;
+	font-weight: 600;
 `;
 
 export const H2 = styled.h2`
 	font-family: freight-macro-pro, serif;
 	font-size: 1.5rem;
-	font-weight: 700;
+	font-weight: 600;
 `;
 
 export const H3 = styled.h3`
 	font-family: freight-macro-pro, serif;
 	font-size: 1.25rem;
-	font-weight: 700;
+	font-weight: 600;
 `;
 
 export const H4 = styled.h3`
 	font-family: freight-macro-pro, serif;
 	font-size: 1rem;
-	font-weight: 700;
+	font-weight: 600;
 `;
 
 export const P = styled.p`

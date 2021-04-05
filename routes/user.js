@@ -41,6 +41,24 @@ router.route('/setCareer/:username').post((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/transferMoney/:username').post((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => {
+			users.chequing = Number(
+				+users.chequing - +req.body.chequingWithdraw + +req.body.savingsWithdraw
+			);
+			users.savings = Number(
+				+users.savings + +req.body.chequingWithdraw - +req.body.savingsWithdraw
+			);
+
+			users
+				.save()
+				.then(() => res.json('Bank account updated!'))
+				.catch((err) => res.status(400).json('Error: ' + err));
+		})
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/setBudget/:username').post((req, res) => {
 	User.findOne({ username: req.params.username })
 		.then((users) => {

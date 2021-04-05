@@ -9,8 +9,11 @@ import {
 	H3,
 	P,
 	H4,
+	TextInput,
+	ColumnFlex,
 } from '../shared/global';
 import ChooseCareer from './../components/ChooseCareer';
+import { GrFormClose } from 'react-icons/gr';
 
 import queryString from 'query-string';
 
@@ -110,6 +113,35 @@ const StyledCheckImg = styled.img`
 	width: 100%;
 `;
 
+const TransferModal = styled.div`
+	background-color: #fff;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: #ccc solid 1px;
+	margin: 1rem auto;
+	width: 100%;
+	max-width: 600px;
+	padding: 1rem;
+	border-radius: 5px;
+	text-align: left;
+	box-shadow: 5px 10px 18px #ccc;
+`;
+
+const Header = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
+
+const CloseButton = styled.button`
+	background-color: transparent;
+	appearance: none;
+	border: 0;
+	font-size: 2rem;
+	line-height: 2rem;
+`;
+
 const Player = ({ location }) => {
 	const [username, setUsername] = useState('');
 	const [servername, setServername] = useState('');
@@ -131,6 +163,14 @@ const Player = ({ location }) => {
 	const [myGoalCheckpoint, setMyGoalCheckpoint] = useState(0);
 
 	const [myBudget, setMyBudget] = useState([{}]);
+
+	const [chequingWithdraw, setChequingWithdraw] = useState(0);
+	const [savingsWithdraw, setSavingsWithdraw] = useState(0);
+
+	const [withdrawSavings, setWithdrawSavings] = useState(false);
+	const [withdrawChequing, setWithdrawChequing] = useState(false);
+
+	const [showModal, setShowModal] = useState(false);
 
 	let currentServerName = '',
 		currentUsername = '';
@@ -203,7 +243,7 @@ const Player = ({ location }) => {
 
 		for (let [key, value] of Object.entries(myBudget)) {
 			results.push(
-				<InputRow>
+				<InputRow key={key}>
 					<H3 style={{ textTransform: 'capitalize' }}>{key}</H3>
 					<P>${value}</P>
 				</InputRow>
@@ -212,6 +252,79 @@ const Player = ({ location }) => {
 
 		return results;
 	};
+
+	const transferMoney = (e) => {
+		e.preventDefault();
+
+		const bankInfo = {
+			savingsWithdraw: savingsWithdraw,
+			chequingWithdraw: chequingWithdraw,
+		};
+
+		axios
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/transferMoney/' +
+					username,
+				bankInfo
+			)
+			.then((res) => {
+				console.log(res.data);
+				alert('transferred!');
+			});
+	};
+
+	const transferMoneyModal = (
+		<TransferModal>
+			<Header>
+				<H2>Transfer Money</H2>
+				<CloseButton>
+					<GrFormClose
+						onClick={() => {
+							setShowModal(false);
+							setWithdrawSavings(false);
+							setWithdrawChequing(false);
+							setSavingsWithdraw(0);
+							setChequingWithdraw(0);
+						}}
+					/>
+				</CloseButton>
+			</Header>
+
+			{withdrawSavings === true ? (
+				<ColumnFlex>
+					<TextInput
+						placeholder="Savings Withdrawal"
+						onChange={(e) => setSavingsWithdraw(e.target.value)}></TextInput>
+					<PrimaryButton onClick={transferMoney}>Transfer</PrimaryButton>
+				</ColumnFlex>
+			) : withdrawChequing === true ? (
+				<ColumnFlex>
+					<TextInput
+						placeholder="Chequing Withdrawal"
+						onChange={(e) => setChequingWithdraw(e.target.value)}></TextInput>
+					<PrimaryButton onClick={transferMoney}>Transfer</PrimaryButton>
+				</ColumnFlex>
+			) : (
+				<ColumnFlex style={{ margin: '2rem 0' }}>
+					<P style={{ marginBottom: '2rem' }}>What would you like to do?</P>
+					<PrimaryButton
+						onClick={(e) => {
+							setWithdrawSavings(true);
+							setWithdrawChequing(false);
+						}}>
+						Move money into Chequing
+					</PrimaryButton>
+					<PrimaryButton
+						onClick={(e) => {
+							setWithdrawSavings(false);
+							setWithdrawChequing(true);
+						}}>
+						Move money into Savings
+					</PrimaryButton>
+				</ColumnFlex>
+			)}
+		</TransferModal>
+	);
 
 	return (
 		<Container
@@ -244,6 +357,10 @@ const Player = ({ location }) => {
 				</SetupCard>
 			) : goal === false ? (
 				<SetupCard>
+					<CardHeading>
+						<HeadingImg src={Goal}></HeadingImg>
+						<H2>Set a Goal</H2>
+					</CardHeading>
 					<SetFinancialGoal username={username}></SetFinancialGoal>
 					<PrimaryButton onClick={(e) => setGoal(true)}>Next</PrimaryButton>
 				</SetupCard>
@@ -264,7 +381,15 @@ const Player = ({ location }) => {
 							<CardHeading>
 								<HeadingImg src={Bank}></HeadingImg>
 								<H2>My Bank Accounts</H2>
+								<PrimaryButton
+									style={{ marginLeft: 'auto' }}
+									onClick={(e) => {
+										setShowModal(true);
+									}}>
+									Transfer
+								</PrimaryButton>
 							</CardHeading>
+							{showModal === true ? transferMoneyModal : null}
 							<div>
 								<InputRow>
 									<H3>Chequing</H3>
@@ -336,9 +461,7 @@ const Player = ({ location }) => {
 								<HeadingImg src={Budget}></HeadingImg>
 								<H2>My Budget</H2>
 							</CardHeading>
-							<div>
-								<BudgetSummary></BudgetSummary>
-							</div>
+							<BudgetSummary></BudgetSummary>
 						</DashboardCard>
 						<DashboardCard>
 							<CardHeading>

@@ -23,15 +23,17 @@ const SetFinancialGoal = (props) => {
 	const [secondCheckpoint, setSecondCheckpoint] = useState(0);
 	const [goalCheckpoint, setGoalCheckpoint] = useState(0);
 
+	const sendFindGoal = (data) => {
+		setFinancialGoal(data.goal);
+		setFirstCheckpoint(data.firstCheckpoint);
+		setSecondCheckpoint(data.secondCheckpoint);
+		setGoalCheckpoint(data.goalCheckpoint);
+	};
+
 	const findGoal = (value) => {
 		financialGoalData
 			.filter(({ code }) => code === value)
-			.map((data) => {
-				setFinancialGoal(data.goal);
-				setFirstCheckpoint(data.firstCheckpoint);
-				setSecondCheckpoint(data.secondCheckpoint);
-				setGoalCheckpoint(data.goalCheckpoint);
-			});
+			.map((data) => sendFindGoal(data));
 	};
 
 	const setGoal = (e) => {

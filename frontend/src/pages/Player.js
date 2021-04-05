@@ -156,8 +156,6 @@ const Player = ({ location }) => {
 	const [mySavings, setMySavings] = useState(0);
 	const [myGoal, setMyGoal] = useState();
 
-	const [myNetWorth, setMyNetWorth] = useState(0);
-
 	const [myFirstCheckpoint, setMyFirstCheckpoint] = useState(0);
 	const [mySecondCheckpoint, setMySecondCheckpoint] = useState(0);
 	const [myGoalCheckpoint, setMyGoalCheckpoint] = useState(0);
@@ -212,7 +210,7 @@ const Player = ({ location }) => {
 				setMyChequing(res.data.chequing);
 				setMySavings(res.data.savings);
 			});
-	}, []);
+	}, [currentUsername]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -231,12 +229,11 @@ const Player = ({ location }) => {
 				.then((res) => {
 					setMyChequing(res.data.chequing);
 					setMySavings(res.data.savings);
-					setMyNetWorth(+res.data.savings + +res.data.chequing);
 				});
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);
-	}, []);
+	}, [currentServerName, currentUsername]);
 
 	const BudgetSummary = () => {
 		const results = [];

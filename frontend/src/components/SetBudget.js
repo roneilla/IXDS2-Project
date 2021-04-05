@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
 	ColumnFlex,
 	FlexBetween,
 	PrimaryButton,
 	TextInput,
-	P,
 	H3,
 	H4,
 } from '../shared/global';

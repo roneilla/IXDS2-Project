@@ -10,7 +10,6 @@ import './App.css';
 import ScrollToTop from './ScrollToTop';
 
 import NavBar from './shared/NavBar';
-import Footer from './shared/Footer';
 
 import Home from './pages/Home';
 import Gamemaster from './pages/Gamemaster';
@@ -50,7 +49,6 @@ const App = () => {
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />
 				</DynamicContainer>
-				{/* <Footer /> */}
 			</AppContainer>
 		</BrowserRouter>
 	);

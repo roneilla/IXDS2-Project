@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { CardHeading, H1, HeadingImg, P } from '../shared/global';
+import { CardHeading, H1, HeadingImg } from '../shared/global';
 import stockMarketData from './../stockMarketData';
 import Stocks from './../assets/Icon/Stocks.png';
 
@@ -62,11 +62,11 @@ const StockCard = (props) => {
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);
-	}, []);
+	}, [growth, props.startingPrice]);
 
 	useEffect(() => {
 		previousPriceRef.current = stockPrice;
-	});
+	}, [stockPrice]);
 
 	const previousPrice = previousPriceRef.current;
 

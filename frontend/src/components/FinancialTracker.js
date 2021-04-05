@@ -5,10 +5,8 @@ import styled from 'styled-components';
 import {
 	FlexBetween,
 	H3,
-	H4,
 	P,
 	PrimaryButton,
-	PrimaryButtonOutline,
 	SmallOutlineButton,
 	TextInput,
 } from './../shared/global';
@@ -68,7 +66,7 @@ const FinancialTracker = (props) => {
 		setReady(true);
 
 		setTotalIncome(salary);
-	}, [roundCount]);
+	}, [roundCount, salary]);
 
 	useEffect(() => {
 		setIncomeEntries([
@@ -79,11 +77,11 @@ const FinancialTracker = (props) => {
 		]);
 
 		setTotalIncome(salary);
-	}, []);
+	}, [salary]);
 
 	const addIncome = () => {
-		if (incomeAmount != null && incomeSource != null) {
-			if (incomeAmount != '' && incomeSource != 'null') {
+		if (incomeAmount !== null && incomeSource !== null) {
+			if (incomeAmount !== '' && incomeSource !== 'null') {
 				setIncomeEntries([
 					...incomeEntries,
 					{
@@ -107,8 +105,8 @@ const FinancialTracker = (props) => {
 	};
 
 	const addExpense = () => {
-		if (expenseAmount != null && expenseSource != null) {
-			if (expenseAmount != '' && expenseSource != 'null') {
+		if (expenseAmount !== null && expenseSource !== null) {
+			if (expenseAmount !== '' && expenseSource !== 'null') {
 				setExpenseEntries([
 					...expenseEntries,
 					{

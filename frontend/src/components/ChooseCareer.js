@@ -17,13 +17,15 @@ const ChooseCareer = (props) => {
 	const [chosenCareer, setChosenCareer] = useState();
 	const [chosenSalary, setChosenSalary] = useState();
 
+	const setOptions = (data) => {
+		setChosenCareer(data.careerName);
+		setChosenSalary(data.startingSalary);
+	};
+
 	const selectOptions = (value) => {
 		careerData
 			.filter(({ careerName }) => careerName === value)
-			.map((data) => {
-				setChosenCareer(data.careerName);
-				setChosenSalary(data.startingSalary);
-			});
+			.map((data) => setOptions(data));
 	};
 
 	const pickCareer = (e) => {

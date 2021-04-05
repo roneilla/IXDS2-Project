@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { CardHeading, HeadingImg, H1 } from '../shared/global';
 import worldEventsData from '../worldEventsData';

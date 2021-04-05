@@ -6,7 +6,6 @@ import {
 	PrimaryButton,
 	TextInput,
 	Button,
-	FlexBetween,
 } from '../shared/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -45,7 +44,6 @@ const Game = () => {
 	const [serverName, setServerName] = useState();
 	const [ready, setReady] = useState(false);
 	const [existingServers, setExistingServers] = useState([]);
-	const [newPopulation, setNewPopulation] = useState(1);
 
 	const history = useHistory();
 
@@ -163,7 +161,7 @@ const Game = () => {
 								setRole('player');
 							}}>
 							<ColumnFlex>
-								<img src={Player}></img>
+								<img alt="" src={Player}></img>
 								<span style={{ color: '#4f73b6' }}>Player</span>
 							</ColumnFlex>
 						</PlayerButton>
@@ -177,7 +175,7 @@ const Game = () => {
 								setRole('gamemaster');
 							}}>
 							<ColumnFlex>
-								<img src={Gamemaster}></img>
+								<img alt="" src={Gamemaster}></img>
 								<span style={{ color: '#f0c418' }}>Gamemaster</span>
 							</ColumnFlex>
 						</GamemasterButton>

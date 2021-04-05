@@ -103,7 +103,7 @@ const Gamemaster = ({ location }) => {
 		setUsername(username);
 		setServername(servername);
 		console.log(roundCount);
-	}, []);
+	}, [location.search, roundCount]);
 
 	const updateDb = (e) => {
 		e.preventDefault();

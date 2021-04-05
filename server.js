@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 // const uri = process.env.ATLAS_URI;
@@ -34,7 +35,7 @@ app.use('/sample', sampleRouter);
 app.use('/serverRoom', serverRouter);
 app.use('/users', userRouter);
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV == 'production') {
 	app.use(express.static('frontend/build'));
 }
 

@@ -102,7 +102,6 @@ const Gamemaster = ({ location }) => {
 		const { username, servername } = queryString.parse(location.search);
 		setUsername(username);
 		setServername(servername);
-		console.log(roundCount);
 	}, [location.search, roundCount]);
 
 	const updateDb = (e) => {
@@ -120,9 +119,7 @@ const Gamemaster = ({ location }) => {
 					servername,
 				roundCounter
 			)
-			.then((res) => {
-				console.log(res.data);
-			});
+			.then((res) => {});
 	};
 
 	const endGame = () => {
@@ -130,9 +127,7 @@ const Gamemaster = ({ location }) => {
 			.delete(
 				'https://the-price-of-life.herokuapp.com/serverRoom/' + servername
 			)
-			.then((res) => {
-				console.log(res.data);
-			});
+			.then((res) => {});
 
 		history.push('/play-again');
 	};

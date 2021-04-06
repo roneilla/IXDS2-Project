@@ -160,18 +160,20 @@ const Player = ({ location }) => {
 	const [mySecondCheckpoint, setMySecondCheckpoint] = useState(0);
 	const [myGoalCheckpoint, setMyGoalCheckpoint] = useState(0);
 
-	const [myBudget, setMyBudget] = useState([{}]);
+	const [myBudget, setMyBudget] = useState([]);
+
+	// let myBudget = [];
+	const [budgetTotal, setBudgetTotal] = useState(0);
 
 	const [chequingWithdraw, setChequingWithdraw] = useState(0);
 	const [savingsWithdraw, setSavingsWithdraw] = useState(0);
-
 	const [withdrawSavings, setWithdrawSavings] = useState(false);
 	const [withdrawChequing, setWithdrawChequing] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
 
-	let currentServerName = '',
-		currentUsername = '';
+	// let currentServerName = '',
+	// 	currentUsername = '';
 
 	const MINUTE_MS = 500;
 
@@ -180,22 +182,22 @@ const Player = ({ location }) => {
 
 		setUsername(username);
 		setServername(servername);
-		currentUsername = username;
-		currentServerName = servername;
+		// currentUsername = username;
+		// currentServerName = servername;
 	}, [location.search]);
 
 	useEffect(() => {
 		axios
-			.get('https://the-price-of-life.herokuapp.com/users/' + currentUsername)
+			.get('https://the-price-of-life.herokuapp.com/users/' + username)
 			.then((res) => {
 				if (res.data.career != null) {
 					setCareer(true);
 					setMySalary(res.data.salary);
 				}
-
 				if (res.data.budget != null) {
 					setBudget(true);
 					setMyBudget(res.data.budget);
+					setBudgetTotal(res.data.budgetTotal);
 				}
 
 				if (res.data.financialGoal != null) {
@@ -210,22 +212,21 @@ const Player = ({ location }) => {
 				setMyChequing(res.data.chequing);
 				setMySavings(res.data.savings);
 			});
-	}, [currentUsername]);
+	}, [username]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			axios
 				.get(
 					'https://the-price-of-life.herokuapp.com/serverRoom/currentRound/' +
-						currentServerName
+						servername
 				)
 				.then((res) => {
 					setRoundCounter(res.data.roundcounter);
 				});
 
-			console.log(currentServerName);
 			axios
-				.get('https://the-price-of-life.herokuapp.com/users/' + currentUsername)
+				.get('https://the-price-of-life.herokuapp.com/users/' + username)
 				.then((res) => {
 					setMyChequing(res.data.chequing);
 					setMySavings(res.data.savings);
@@ -233,21 +234,16 @@ const Player = ({ location }) => {
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);
-	}, [currentServerName, currentUsername]);
+	}, [servername, username]);
 
 	const BudgetSummary = () => {
-		const results = [];
-
-		for (let [key, value] of Object.entries(myBudget)) {
-			results.push(
-				<InputRow key={key}>
-					<H3 style={{ textTransform: 'capitalize' }}>{key}</H3>
-					<P>${value}</P>
-				</InputRow>
-			);
-		}
-
-		return results;
+		const summary = Object.entries(myBudget).map(([key, value]) => (
+			<InputRow key={key}>
+				<H3 style={{ textTransform: 'capitalize' }}>{key}</H3>
+				<P className="dollar">{value}</P>
+			</InputRow>
+		));
+		return summary;
 	};
 
 	const transferMoney = (e) => {
@@ -265,7 +261,6 @@ const Player = ({ location }) => {
 				bankInfo
 			)
 			.then((res) => {
-				console.log(res.data);
 				alert('transferred!');
 			});
 	};
@@ -458,7 +453,7 @@ const Player = ({ location }) => {
 								<HeadingImg src={Budget}></HeadingImg>
 								<H2>My Budget</H2>
 							</CardHeading>
-							<BudgetSummary></BudgetSummary>
+							<BudgetSummary className="budgetSummary"></BudgetSummary>
 						</DashboardCard>
 						<DashboardCard>
 							<CardHeading>
@@ -476,7 +471,8 @@ const Player = ({ location }) => {
 							<FinancialTracker
 								username={username}
 								roundCount={roundCounter}
-								salary={mySalary}></FinancialTracker>
+								salary={mySalary}
+								budget={budgetTotal}></FinancialTracker>
 						</DashboardCard>
 					</DashboardItem>
 				</Grid>

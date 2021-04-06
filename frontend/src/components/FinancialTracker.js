@@ -38,6 +38,7 @@ const StyledTextInput = styled(TextInput)`
 const FinancialTracker = (props) => {
 	const username = props.username;
 	const roundCount = props.roundCount;
+	const budget = props.budget;
 
 	const [ready, setReady] = useState(false);
 
@@ -62,22 +63,31 @@ const FinancialTracker = (props) => {
 
 	// use effect, watch if round count changes
 	useEffect(() => {
-		console.log('hey its a new round! ' + roundCount);
 		setReady(true);
 
 		setTotalIncome(salary);
-	}, [roundCount, salary]);
+		setTotalExpenses(budget);
+	}, [roundCount, salary, budget]);
 
 	useEffect(() => {
 		setIncomeEntries([
 			{
-				source: 'Salary 1',
+				source: 'Salary',
 				amount: Number(salary),
 			},
 		]);
 
 		setTotalIncome(salary);
-	}, [salary]);
+
+		setExpenseEntries([
+			{
+				source: 'Budget',
+				amount: Number(budget),
+			},
+		]);
+
+		setTotalExpenses(salary);
+	}, [salary, budget]);
 
 	const addIncome = () => {
 		if (incomeAmount !== null && incomeSource !== null) {
@@ -207,7 +217,7 @@ const FinancialTracker = (props) => {
 			<div>
 				<H3>Expense Entries</H3>
 				{expenseEntries.map((data, index) =>
-					index > 0 ? (
+					index >= 0 ? (
 						<InputRow key={index}>
 							<H3> {data.source}</H3>
 							<P className="dollar">{data.amount}</P>
@@ -243,7 +253,6 @@ const FinancialTracker = (props) => {
 				bankDeposit
 			)
 			.then((res) => {
-				console.log(res.data);
 				alert('deposits added');
 			});
 

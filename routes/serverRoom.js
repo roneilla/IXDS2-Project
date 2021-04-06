@@ -35,9 +35,8 @@ router.route('/updatePopulation/:servername').post((req, res) => {
 			if (serverRoom.population < 7) {
 				serverRoom.population = serverRoom.population + 1;
 			} else {
-				console.log('max 7 players per room');
+				alert('max 7 players per room');
 			}
-
 			// return an error if room has 7 users
 
 			serverRoom

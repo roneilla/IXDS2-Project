@@ -49,7 +49,6 @@ const Game = () => {
 
 	const beginGame = (e) => {
 		e.preventDefault();
-		console.log(username + ' is a ' + role);
 
 		const user = {
 			username: username,
@@ -61,15 +60,13 @@ const Game = () => {
 
 		axios
 			.post('https://the-price-of-life.herokuapp.com/users/add', user)
-			.then((res) => console.log(res.data));
+			.then();
 
 		setReady(true);
 	};
 
 	const createServer = (e) => {
 		e.preventDefault();
-
-		console.log('server name is' + serverName);
 
 		const serverInfo = {
 			servername: serverName,
@@ -87,7 +84,6 @@ const Game = () => {
 						serverInfo
 					)
 					.then((res) => {
-						console.log(res.data);
 						history.push(
 							'/gamemaster?username=' + username + '&servername=' + serverName
 						);
@@ -99,8 +95,6 @@ const Game = () => {
 	const joinServer = (e) => {
 		e.preventDefault();
 
-		console.log('server name is' + serverName);
-
 		for (let i = 0; i <= existingServers.length; i++) {
 			if (serverName === existingServers[i]) {
 				if (existingServers[i].population !== 7) {
@@ -109,18 +103,12 @@ const Game = () => {
 							'https://the-price-of-life.herokuapp.com/serverRoom/updatePopulation/' +
 								serverName
 						)
-						.then((res) => {
-							console.log(res.data.population);
-						});
+						.then((res) => {});
 
 					history.push(
 						'/player?username=' + username + '&servername=' + serverName
 					);
-				} else {
-					console.log('too many people here');
 				}
-			} else {
-				console.log('server does not exist');
 			}
 		}
 	};
@@ -133,9 +121,7 @@ const Game = () => {
 					setExistingServers(response.data.map((server) => server.servername));
 				}
 			})
-			.catch((error) => {
-				console.log(error);
-			});
+			.catch((error) => {});
 	}, []);
 
 	return (

@@ -53,7 +53,6 @@ const SetFinancialGoal = (props) => {
 				goalInfo
 			)
 			.then((res) => {
-				console.log(res.data);
 				alert('goal added');
 			});
 	};

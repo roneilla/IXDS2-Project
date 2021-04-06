@@ -109,7 +109,6 @@ const SetBudget = (props) => {
 				budgetInfo
 			)
 			.then((res) => {
-				console.log(res.data);
 				alert('budget added');
 			});
 	};
@@ -254,7 +253,7 @@ const SetBudget = (props) => {
 					<StyledP>household: {household}</StyledP>
 					<StyledP>personal: {personal}</StyledP> */}
 					<StyledTotal>
-						<H3> Total: {total}</H3>
+						<H3> Total: ${total}</H3>
 					</StyledTotal>
 					<ColumnFlex>
 						<PrimaryButton onClick={calculateTotal}>Calculate</PrimaryButton>

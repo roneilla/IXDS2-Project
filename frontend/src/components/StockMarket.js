@@ -58,7 +58,6 @@ const StockCard = (props) => {
 			setStockPrice(
 				props.startingPrice + Math.floor(Math.random(0, growth) * 100)
 			);
-			console.log('Logs every second');
 		}, MINUTE_MS);
 
 		return () => clearInterval(interval);

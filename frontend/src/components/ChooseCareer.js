@@ -42,7 +42,6 @@ const ChooseCareer = (props) => {
 				careerInfo
 			)
 			.then((res) => {
-				console.log(res.data);
 				alert('career added');
 			});
 	};

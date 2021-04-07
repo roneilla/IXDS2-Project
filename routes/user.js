@@ -124,6 +124,27 @@ router.route('/purchaseStock/:username').post((req, res) => {
 		User.findOneAndUpdate(
 			{
 				username: req.params.username,
+				stocksOwned: {
+					$elemMatch: {
+						stockName: req.body.stockName,
+					},
+				},
+			},
+			{
+				$inc: { 'stocksOwned.$.quantity': req.body.quantity },
+				$set: { 'stocksOwned.$.purchasePrice': req.body.purchasePrice },
+			}
+		)
+			.then((users) => {
+				users
+					.save()
+					.then(() => res.json('More stocks purchased!'))
+					.catch((err) => res.status(400).json('Error: ' + err));
+			})
+			.catch((err) => res.status(400).json('Error: ' + err)),
+		User.findOneAndUpdate(
+			{
+				username: req.params.username,
 				'stocksOwned.stockName': {
 					$ne: req.body.stockName,
 				},
@@ -142,23 +163,6 @@ router.route('/purchaseStock/:username').post((req, res) => {
 				users
 					.save()
 					.then(() => res.json('Stocks newly purchased!'))
-					.catch((err) => res.status(400).json('Error: ' + err));
-			})
-			.catch((err) => res.status(400).json('Error: ' + err)),
-		User.findOneAndUpdate(
-			{
-				username: req.params.username,
-				'stocksOwned.stockName': req.body.stockName,
-			},
-			{
-				$inc: { 'stocksOwned.$.quantity': req.body.quantity },
-				$set: { 'stocksOwned.$.purchasePrice': req.body.purchasePrice },
-			}
-		)
-			.then((users) => {
-				users
-					.save()
-					.then(() => res.json('More stocks purchased!'))
 					.catch((err) => res.status(400).json('Error: ' + err));
 			})
 			.catch((err) => res.status(400).json('Error: ' + err)),

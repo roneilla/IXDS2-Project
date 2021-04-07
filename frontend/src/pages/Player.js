@@ -7,10 +7,15 @@ import {
 	H2,
 	HeadingImg,
 	H3,
+	H1,
 	P,
 	H4,
 	TextInput,
 	ColumnFlex,
+	YellowButton,
+	YellowButtonSmall,
+	PrimaryButtonOutline,
+	SmallOutlineButton,
 } from '../shared/global';
 import ChooseCareer from './../components/ChooseCareer';
 import { GrFormClose } from 'react-icons/gr';
@@ -52,6 +57,7 @@ const DashboardItem = styled.div`
 	flex-direction: column;
 	margin: 1rem 0;
 	border-radius: 5px;
+	max-height: calc(100vh - 75px - 50px - 2rem);
 `;
 
 const DashboardCard = styled.div`
@@ -142,6 +148,16 @@ const CloseButton = styled.button`
 	line-height: 2rem;
 `;
 
+const StockContainer = styled.div`
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	border: 1px #eee solid;
+	border-radius: 5px;
+	padding: 0.5rem;
+	margin: 0.25rem 0;
+	align-items: center;
+`;
+
 const Player = ({ location }) => {
 	const [username, setUsername] = useState('');
 	const [servername, setServername] = useState('');
@@ -161,8 +177,14 @@ const Player = ({ location }) => {
 	const [myGoalCheckpoint, setMyGoalCheckpoint] = useState(0);
 
 	const [myBudget, setMyBudget] = useState([]);
+	const [myStocks, setMyStocks] = useState([
+		{
+			stockName: '',
+			purchasePrice: 0,
+			quantity: 0,
+		},
+	]);
 
-	// let myBudget = [];
 	const [budgetTotal, setBudgetTotal] = useState(0);
 
 	const [chequingWithdraw, setChequingWithdraw] = useState(0);
@@ -171,9 +193,14 @@ const Player = ({ location }) => {
 	const [withdrawChequing, setWithdrawChequing] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
+	const [showStockPurchaseModal, setShowStockPurchaseModal] = useState(false);
+	const [showStockSellModal, setShowStockSellModal] = useState(false);
 
-	// let currentServerName = '',
-	// 	currentUsername = '';
+	const [purchasePrice, setPurchasePrice] = useState(0);
+	const [stockName, setStockName] = useState();
+	const [quantity, setQuantity] = useState(0);
+	const [sellQuantity, setSellQuantity] = useState(0);
+	const [sellStockName, setSellStockName] = useState();
 
 	const MINUTE_MS = 500;
 
@@ -187,49 +214,55 @@ const Player = ({ location }) => {
 	}, [location.search]);
 
 	useEffect(() => {
-		axios
-			.get('https://the-price-of-life.herokuapp.com/users/' + username)
-			.then((res) => {
-				if (res.data.career != null) {
-					setCareer(true);
-					setMySalary(res.data.salary);
-				}
-				if (res.data.budget != null) {
-					setBudget(true);
-					setMyBudget(res.data.budget);
-					setBudgetTotal(res.data.budgetTotal);
-				}
+		axios.get('http://localhost:3001/users/' + username).then((res) => {
+			if (res.data.career != null) {
+				setCareer(true);
+				setMySalary(res.data.salary);
+			}
+			if (res.data.budget != null) {
+				setBudget(true);
+				setBudgetTotal(res.data.budgetTotal);
+			}
 
-				if (res.data.financialGoal != null) {
-					setGoal(true);
-					setMyGoal(res.data.financialGoal);
-					setMyFirstCheckpoint(res.data.financialCheckpoints.first);
-					setMySecondCheckpoint(res.data.financialCheckpoints.second);
-					setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
-				}
+			if (res.data.financialGoal != null) {
+				setGoal(true);
+				setMyGoal(res.data.financialGoal);
+				setMyFirstCheckpoint(res.data.financialCheckpoints.first);
+				setMySecondCheckpoint(res.data.financialCheckpoints.second);
+				setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
+			}
 
-				setMyCareer(res.data.career);
-				setMyChequing(res.data.chequing);
-				setMySavings(res.data.savings);
-			});
+			setMyCareer(res.data.career);
+			setMyChequing(res.data.chequing);
+			setMySavings(res.data.savings);
+		});
 	}, [username]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			axios
-				.get(
-					'https://the-price-of-life.herokuapp.com/serverRoom/currentRound/' +
-						servername
-				)
+				.get('http://localhost:3001/serverRoom/currentRound/' + servername)
 				.then((res) => {
 					setRoundCounter(res.data.roundcounter);
 				});
 
+			axios.get('http://localhost:3001/users/' + username).then((res) => {
+				setMyBudget(res.data.budget);
+				setMySavings(res.data.savings);
+				setMyCareer(res.data.career);
+				setMyChequing(res.data.chequing);
+				setMySavings(res.data.savings);
+				setMySalary(res.data.salary);
+				// setMyGoal(res.data.financialGoal);
+				// setMyFirstCheckpoint(res.data.financialCheckpoints.first);
+				// setMySecondCheckpoint(res.data.financialCheckpoints.second);
+				// setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
+			});
+
 			axios
-				.get('https://the-price-of-life.herokuapp.com/users/' + username)
+				.get('http://localhost:3001/users/viewStocks/' + username)
 				.then((res) => {
-					setMyChequing(res.data.chequing);
-					setMySavings(res.data.savings);
+					setMyStocks(res.data);
 				});
 		}, MINUTE_MS);
 
@@ -255,13 +288,9 @@ const Player = ({ location }) => {
 		};
 
 		axios
-			.post(
-				'https://the-price-of-life.herokuapp.com/users/transferMoney/' +
-					username,
-				bankInfo
-			)
+			.post('http://localhost:3001/users/transferMoney/' + username, bankInfo)
 			.then((res) => {
-				alert('transferred!');
+				console.log('transferred');
 			});
 	};
 
@@ -315,6 +344,98 @@ const Player = ({ location }) => {
 					</PrimaryButton>
 				</ColumnFlex>
 			)}
+		</TransferModal>
+	);
+
+	const purchaseStock = (e) => {
+		e.preventDefault();
+		const stockInfo = {
+			stockName: stockName,
+			purchasePrice: purchasePrice,
+			quantity: quantity,
+		};
+
+		console.log(myStocks);
+
+		axios
+			.post('http://localhost:3001/users/purchaseStock/' + username, stockInfo)
+			.then((res) => {
+				console.log('Purchased!');
+			});
+
+		setStockName('');
+		setPurchasePrice(0);
+		setQuantity(0);
+
+		setShowStockPurchaseModal(false);
+	};
+
+	const StockPurchaseModal = (
+		<TransferModal style={{ maxWidth: '700px' }}>
+			<Header>
+				<H2>Purchase Stock</H2>
+				<CloseButton>
+					<GrFormClose
+						onClick={() => {
+							setShowStockPurchaseModal(false);
+						}}
+					/>
+				</CloseButton>
+			</Header>
+
+			<InputRow>
+				<TextInput
+					placeholder="Stock Name"
+					onChange={(e) => setStockName(e.target.value)}></TextInput>
+				<TextInput
+					type="number"
+					placeholder="Stock Price"
+					onChange={(e) => setPurchasePrice(e.target.value)}></TextInput>
+				<TextInput
+					type="number"
+					placeholder="Quantity"
+					onChange={(e) => setQuantity(e.target.value)}></TextInput>
+			</InputRow>
+
+			<PrimaryButton style={{ float: 'right' }} onClick={purchaseStock}>
+				Purchase
+			</PrimaryButton>
+		</TransferModal>
+	);
+
+	const sellStocks = (e) => {
+		e.preventDefault();
+
+		const sellInfo = {
+			stockName: sellStockName,
+			quantity: sellQuantity,
+		};
+		axios
+			.post('http://localhost:3001/users/sellStock/' + username, sellInfo)
+			.then((res) => {
+				console.log('Sold!');
+			});
+	};
+
+	const StockSellModal = (
+		<TransferModal style={{ width: '400px' }}>
+			<Header>
+				<H2>Sell this Stock</H2>
+				<CloseButton>
+					<GrFormClose
+						onClick={() => {
+							setShowStockSellModal(false);
+						}}
+					/>
+				</CloseButton>
+			</Header>
+			<P>How many stocks would you like to sell?</P>
+			<TextInput
+				type="number"
+				style={{ width: '100px' }}
+				placeholder="Quantity"
+				onChange={(e) => setSellQuantity(e.target.value)}></TextInput>
+			<PrimaryButton onClick={sellStocks}>Sell</PrimaryButton>
 		</TransferModal>
 	);
 
@@ -373,13 +494,13 @@ const Player = ({ location }) => {
 							<CardHeading>
 								<HeadingImg src={Bank}></HeadingImg>
 								<H2>My Bank Accounts</H2>
-								<PrimaryButton
+								<SmallOutlineButton
 									style={{ marginLeft: 'auto' }}
 									onClick={(e) => {
 										setShowModal(true);
 									}}>
 									Transfer
-								</PrimaryButton>
+								</SmallOutlineButton>
 							</CardHeading>
 							{showModal === true ? transferMoneyModal : null}
 							<div>
@@ -453,13 +574,41 @@ const Player = ({ location }) => {
 								<HeadingImg src={Budget}></HeadingImg>
 								<H2>My Budget</H2>
 							</CardHeading>
-							<BudgetSummary className="budgetSummary"></BudgetSummary>
+							<BudgetSummary></BudgetSummary>
 						</DashboardCard>
-						<DashboardCard>
+						<DashboardCard style={{ height: '50%' }}>
 							<CardHeading>
 								<HeadingImg src={Stocks}></HeadingImg>
 								<H2>My Stocks</H2>
+								<SmallOutlineButton
+									style={{ marginLeft: 'auto' }}
+									onClick={(e) => setShowStockPurchaseModal(true)}>
+									Purchase Stock
+								</SmallOutlineButton>
 							</CardHeading>
+							{showStockPurchaseModal === true ? StockPurchaseModal : null}
+							{showStockSellModal === true ? StockSellModal : null}
+							<div>
+								{myStocks
+									.filter((props) => props.quantity > 0)
+									.map((data, index) => (
+										<StockContainer key={index}>
+											<H4 style={{ gridColumn: 'span 2' }}>{data.stockName}</H4>
+											<P style={{ gridColumn: 'span 2' }} className="dollar">
+												{data.purchasePrice}
+											</P>
+											<P style={{ gridColumn: 'span 1' }}>{data.quantity}</P>
+											<YellowButtonSmall
+												style={{ gridColumn: 'span 1' }}
+												onClick={(e) => {
+													setShowStockSellModal(true);
+													setSellStockName(data.stockName);
+												}}>
+												Sell
+											</YellowButtonSmall>
+										</StockContainer>
+									))}
+							</div>
 						</DashboardCard>
 					</DashboardItem>
 					<DashboardItem>

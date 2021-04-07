@@ -14,7 +14,7 @@ import queryString from 'query-string';
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	grid-column-gap: 1rem;
 	padding: 0 1rem;
 `;
@@ -50,6 +50,7 @@ const Modal = styled.div`
 	border-radius: 5px;
 	color: #000;
 	text-align: center;
+	box-shadow: 5px 10px 18px #ccc;
 `;
 
 const RoundTrackerContainer = styled.div`
@@ -66,8 +67,14 @@ const RoundTrackerContainer = styled.div`
 
 const ButtonContainer = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	margin: 2rem 0;
+
+	& ${PrimaryButton} {
+		margin: 0.5rem 0;
+	}
 `;
 
 const ButtonsContainer = styled.div`
@@ -115,8 +122,7 @@ const Gamemaster = ({ location }) => {
 
 		axios
 			.post(
-				'https://the-price-of-life.herokuapp.com/serverRoom/updateRound/' +
-					servername,
+				'http://localhost:3001/serverRoom/updateRound/' + servername,
 				roundCounter
 			)
 			.then((res) => {});
@@ -124,9 +130,7 @@ const Gamemaster = ({ location }) => {
 
 	const endGame = () => {
 		axios
-			.delete(
-				'https://the-price-of-life.herokuapp.com/serverRoom/' + servername
-			)
+			.delete('http://localhost:3001/serverRoom/' + servername)
 			.then((res) => {});
 
 		history.push('/play-again');
@@ -169,9 +173,9 @@ const Gamemaster = ({ location }) => {
 						) : null}
 					</RoundTrackerContainer>
 				</DashboardItem>
-				<DashboardItem>
+				{/* <DashboardItem>
 					<WorldEvents roundCounter={roundCount}></WorldEvents>
-				</DashboardItem>
+				</DashboardItem> */}
 				<DashboardItem>
 					<StockMarket roundCounter={roundCount}></StockMarket>
 				</DashboardItem>

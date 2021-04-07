@@ -107,10 +107,10 @@ const FinancialTracker = (props) => {
 				setIncomeSource('');
 				setIncomeAmount('');
 			} else {
-				alert('enter an amount');
+				alert('Please enter an amount');
 			}
 		} else {
-			alert('enter an amount');
+			alert('Please enter an amount');
 		}
 	};
 
@@ -132,10 +132,10 @@ const FinancialTracker = (props) => {
 				setExpenseSource('');
 				setExpenseAmount('');
 			} else {
-				alert('enter an amount');
+				alert('Please enter an amount');
 			}
 		} else {
-			alert('enter an amount');
+			alert('Please enter an amount');
 		}
 	};
 
@@ -248,12 +248,9 @@ const FinancialTracker = (props) => {
 		};
 
 		axios
-			.post(
-				'https://the-price-of-life.herokuapp.com/users/bankAccount/' + username,
-				bankDeposit
-			)
+			.post('http://localhost:3001/users/bankAccount/' + username, bankDeposit)
 			.then((res) => {
-				alert('deposits added');
+				console.log('deposited');
 			});
 
 		if (total === 0) {
@@ -267,7 +264,7 @@ const FinancialTracker = (props) => {
 			setReady(false);
 			return;
 		} else {
-			alert('please make sure that total left to transfer is 0');
+			alert('Please make sure that total left to transfer is $0');
 		}
 	};
 

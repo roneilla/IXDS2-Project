@@ -13,6 +13,7 @@ import styled from 'styled-components';
 
 import Gamemaster from './../assets/gamemaster.png';
 import Player from './../assets/player.png';
+import Toast from '../shared/Toast';
 
 const PlayerButton = styled(Button)`
 	background-color: #ecf1f7;
@@ -58,9 +59,7 @@ const Game = () => {
 		// create an error for if username is null or undefine
 		// set parameter requirements for username
 
-		axios
-			.post('https://the-price-of-life.herokuapp.com/users/add', user)
-			.then();
+		axios.post('http://localhost:3001/users/add', user).then();
 
 		setReady(true);
 	};
@@ -75,14 +74,15 @@ const Game = () => {
 
 		for (let i = 0; i <= existingServers.length; i++) {
 			if (serverName === existingServers[i]) {
-				alert('server already exists. choose a new name');
+				alert(
+					'The server ' +
+						serverName +
+						' already exists. Please choose a new name.'
+				);
 				// TODO clear the input field
 			} else {
 				axios
-					.post(
-						'https://the-price-of-life.herokuapp.com/serverRoom/add',
-						serverInfo
-					)
+					.post('http://localhost:3001/serverRoom/add', serverInfo)
 					.then((res) => {
 						history.push(
 							'/gamemaster?username=' + username + '&servername=' + serverName
@@ -100,8 +100,7 @@ const Game = () => {
 				if (existingServers[i].population !== 7) {
 					axios
 						.post(
-							'https://the-price-of-life.herokuapp.com/serverRoom/updatePopulation/' +
-								serverName
+							'http://localhost:3001/serverRoom/updatePopulation/' + serverName
 						)
 						.then((res) => {});
 
@@ -115,7 +114,7 @@ const Game = () => {
 
 	useEffect(() => {
 		axios
-			.get('https://the-price-of-life.herokuapp.com/serverRoom')
+			.get('http://localhost:3001/serverRoom')
 			.then((response) => {
 				if (response.data.length > 0) {
 					setExistingServers(response.data.map((server) => server.servername));

@@ -9,6 +9,7 @@ import {
 	H4,
 } from '../shared/global';
 import axios from 'axios';
+import Toast from './../shared/Toast';
 
 const StyledTextInput = styled(TextInput)`
 	width: 200px;
@@ -53,6 +54,7 @@ const Summary = styled.div`
 
 const SetBudget = (props) => {
 	const username = props.username;
+	const [toast, setToast] = useState(0);
 
 	const [housing, setHousing] = useState(0);
 	const [utilities, setUtilities] = useState(0);
@@ -104,17 +106,19 @@ const SetBudget = (props) => {
 		};
 
 		axios
-			.post(
-				'https://the-price-of-life.herokuapp.com/users/setBudget/' + username,
-				budgetInfo
-			)
+			.post('http://localhost:3001/users/setBudget/' + username, budgetInfo)
 			.then((res) => {
-				alert('budget added');
+				setToast(1);
 			});
 	};
 
 	return (
 		<ColumnFlex>
+			<Toast
+				color="#F0C418"
+				bgColor="#FEF9E6"
+				text="Budget added!"
+				show={toast}></Toast>
 			<FlexBetween>
 				<StyledDiv>
 					<InputRow>

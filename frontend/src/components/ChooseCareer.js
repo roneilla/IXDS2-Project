@@ -3,6 +3,7 @@ import { ColumnFlex, H3, P, PrimaryButton, Select } from '../shared/global';
 import axios from 'axios';
 import careerData from './../careerData';
 import styled from 'styled-components';
+import Toast from './../shared/Toast';
 
 const CareerCard = styled.div`
 	border-radius: 5px;
@@ -16,6 +17,8 @@ const ChooseCareer = (props) => {
 	const username = props.username;
 	const [chosenCareer, setChosenCareer] = useState();
 	const [chosenSalary, setChosenSalary] = useState();
+
+	const [toast, setToast] = useState(0);
 
 	const setOptions = (data) => {
 		setChosenCareer(data.careerName);
@@ -37,17 +40,19 @@ const ChooseCareer = (props) => {
 		};
 
 		axios
-			.post(
-				'https://the-price-of-life.herokuapp.com/users/setCareer/' + username,
-				careerInfo
-			)
+			.post('http://localhost:3001/users/setCareer/' + username, careerInfo)
 			.then((res) => {
-				alert('career added');
+				setToast(1);
 			});
 	};
 
 	return (
 		<ColumnFlex>
+			<Toast
+				color="#F0C418"
+				bgColor="#FEF9E6"
+				text="Career added!"
+				show={toast}></Toast>
 			<Select
 				onChange={(e) => {
 					selectOptions(e.target.value);

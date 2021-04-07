@@ -113,6 +113,83 @@ router.route('/bankAccount/:username').post((req, res) => {
 		.catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/viewStocks/:username').get((req, res) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => res.json(users.stocksOwned))
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
+router.route('/purchaseStock/:username').post((req, res) => {
+	Promise.all([
+		User.findOneAndUpdate(
+			{
+				username: req.params.username,
+				'stocksOwned.stockName': {
+					$ne: req.body.stockName,
+				},
+			},
+			{
+				$addToSet: {
+					stocksOwned: {
+						stockName: req.body.stockName,
+						purchasePrice: Number(req.body.purchasePrice),
+						quantity: req.body.quantity,
+					},
+				},
+			}
+		)
+			.then((users) => {
+				users
+					.save()
+					.then(() => res.json('Stocks newly purchased!'))
+					.catch((err) => res.status(400).json('Error: ' + err));
+			})
+			.catch((err) => res.status(400).json('Error: ' + err)),
+		User.findOneAndUpdate(
+			{
+				username: req.params.username,
+				'stocksOwned.stockName': req.body.stockName,
+			},
+			{
+				$inc: { 'stocksOwned.$.quantity': req.body.quantity },
+				$set: { 'stocksOwned.$.purchasePrice': req.body.purchasePrice },
+			}
+		)
+			.then((users) => {
+				users
+					.save()
+					.then(() => res.json('More stocks purchased!'))
+					.catch((err) => res.status(400).json('Error: ' + err));
+			})
+			.catch((err) => res.status(400).json('Error: ' + err)),
+	])
+		.then((res) => {
+			console.log('stock purchased');
+		})
+		.catch((err) => {
+			console.error('Something went wrong', err);
+		});
+});
+
+router.route('/sellStock/:username').post((req, res) => {
+	User.findOneAndUpdate(
+		{
+			username: req.params.username,
+			'stocksOwned.stockName': req.body.stockName,
+		},
+		{
+			$inc: { 'stocksOwned.$.quantity': -req.body.quantity },
+		}
+	)
+		.then((users) => {
+			users
+				.save()
+				.then(() => res.json('Stocks sold!'))
+				.catch((err) => res.status(400).json('Error: ' + err));
+		})
+		.catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/end/:username').delete((req, res) => {
 	User.findOneAndDelete({ username: req.params.username })
 		.then(() => res.json('User deleted.'))

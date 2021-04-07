@@ -81,6 +81,13 @@ const userSchema = new Schema(
 		savings: {
 			type: Number,
 		},
+		stocksOwned: [
+			{
+				stockName: { type: String },
+				purchasePrice: { type: Number },
+				quantity: { type: Number },
+			},
+		],
 	},
 	{
 		timestamps: true,

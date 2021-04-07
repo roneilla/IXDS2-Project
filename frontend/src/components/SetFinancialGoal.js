@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import financialGoalData from './../financialGoalData';
 import { PrimaryButton, TextInput, H4, ColumnFlex, P } from '../shared/global';
+import Toast from './../shared/Toast';
 
 const GoalRow = styled.div`
 	display: flex;
@@ -17,6 +18,7 @@ const GoalRow = styled.div`
 
 const SetFinancialGoal = (props) => {
 	const username = props.username;
+	const [toast, setToast] = useState(0);
 
 	const [financialGoal, setFinancialGoal] = useState();
 	const [firstCheckpoint, setFirstCheckpoint] = useState(0);
@@ -48,17 +50,21 @@ const SetFinancialGoal = (props) => {
 
 		axios
 			.post(
-				'https://the-price-of-life.herokuapp.com/users/setFinancialGoal/' +
-					username,
+				'http://localhost:3001/users/setFinancialGoal/' + username,
 				goalInfo
 			)
 			.then((res) => {
-				alert('goal added');
+				setToast(1);
 			});
 	};
 
 	return (
 		<ColumnFlex>
+			<Toast
+				color="#F0C418"
+				bgColor="#FEF9E6"
+				text="Goal added!"
+				show={toast}></Toast>
 			<P>Type the code exactly as you see it</P>
 			<TextInput
 				type="text"

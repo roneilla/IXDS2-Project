@@ -118,6 +118,11 @@ export const YellowButton = styled(Button)`
 	color: #fff;
 `;
 
+export const YellowButtonSmall = styled(SmallButton)`
+	background-color: #f0c418;
+	color: #fff;
+`;
+
 export const ClearButton = styled(Button)`
 	color: #111;
 	background-color: transparent;

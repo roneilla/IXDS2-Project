@@ -61,15 +61,9 @@ const FinancialTracker = (props) => {
 	const [chequingDeposit, setChequingDeposit] = useState(0);
 	const [savingsDeposit, setSavingsDeposit] = useState(0);
 
-	// use effect, watch if round count changes
 	useEffect(() => {
 		setReady(true);
 
-		setTotalIncome(salary);
-		setTotalExpenses(budget);
-	}, [roundCount, salary, budget]);
-
-	useEffect(() => {
 		setIncomeEntries([
 			{
 				source: 'Salary',
@@ -87,7 +81,7 @@ const FinancialTracker = (props) => {
 		]);
 
 		setTotalExpenses(salary);
-	}, [salary, budget]);
+	}, [roundCount, salary, budget]);
 
 	const addIncome = () => {
 		if (incomeAmount !== null && incomeSource !== null) {

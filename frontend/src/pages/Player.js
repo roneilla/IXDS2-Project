@@ -504,6 +504,7 @@ const Player = ({ location }) => {
 								)
 								.then((res) => {
 									setMyBudget(res.data.budget);
+									setBudgetTotal(res.data.budgetTotal);
 								});
 							setBudget(true);
 						}}>

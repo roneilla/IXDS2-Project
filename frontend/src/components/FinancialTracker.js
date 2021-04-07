@@ -80,7 +80,7 @@ const FinancialTracker = (props) => {
 			},
 		]);
 
-		setTotalExpenses(salary);
+		setTotalExpenses(budget);
 	}, [roundCount, salary, budget]);
 
 	const addIncome = () => {

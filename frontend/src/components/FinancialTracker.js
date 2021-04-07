@@ -248,7 +248,10 @@ const FinancialTracker = (props) => {
 		};
 
 		axios
-			.post('http://localhost:3001/users/bankAccount/' + username, bankDeposit)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/bankAccount/' + username,
+				bankDeposit
+			)
 			.then((res) => {
 				console.log('deposited');
 			});

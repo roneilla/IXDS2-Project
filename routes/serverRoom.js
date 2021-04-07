@@ -32,13 +32,7 @@ router.route('/add').post((req, res) => {
 router.route('/updatePopulation/:servername').post((req, res) => {
 	ServerRoom.findOne({ servername: req.params.servername })
 		.then((serverRoom) => {
-			if (serverRoom.population < 7) {
-				serverRoom.population = serverRoom.population + 1;
-			} else {
-				alert('Only 6 players per room please!');
-			}
-			// return an error if room has 7 users
-
+			serverRoom.population = serverRoom.population + 1;
 			serverRoom
 				.save()
 				.then(() =>

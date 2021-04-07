@@ -50,7 +50,8 @@ const SetFinancialGoal = (props) => {
 
 		axios
 			.post(
-				'http://localhost:3001/users/setFinancialGoal/' + username,
+				'https://the-price-of-life.herokuapp.com/users/setFinancialGoal/' +
+					username,
 				goalInfo
 			)
 			.then((res) => {

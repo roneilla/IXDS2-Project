@@ -106,7 +106,10 @@ const SetBudget = (props) => {
 		};
 
 		axios
-			.post('http://localhost:3001/users/setBudget/' + username, budgetInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/setBudget/' + username,
+				budgetInfo
+			)
 			.then((res) => {
 				setToast(1);
 			});

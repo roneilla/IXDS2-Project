@@ -214,53 +214,55 @@ const Player = ({ location }) => {
 	}, [location.search]);
 
 	useEffect(() => {
-		axios.get('http://localhost:3001/users/' + username).then((res) => {
-			if (res.data.career != null) {
-				setCareer(true);
-				setMySalary(res.data.salary);
-			}
-			if (res.data.budget != null) {
-				setBudget(true);
-				setBudgetTotal(res.data.budgetTotal);
-			}
+		axios
+			.get('https://the-price-of-life.herokuapp.com/users/' + username)
+			.then((res) => {
+				if (res.data.career != null) {
+					setCareer(true);
+					setMySalary(res.data.salary);
+				}
+				if (res.data.budget != null) {
+					setBudget(true);
+					setBudgetTotal(res.data.budgetTotal);
+				}
 
-			if (res.data.financialGoal != null) {
-				setGoal(true);
-				setMyGoal(res.data.financialGoal);
-				setMyFirstCheckpoint(res.data.financialCheckpoints.first);
-				setMySecondCheckpoint(res.data.financialCheckpoints.second);
-				setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
-			}
+				if (res.data.financialGoal != null) {
+					setGoal(true);
+					setMyGoal(res.data.financialGoal);
+					setMyFirstCheckpoint(res.data.financialCheckpoints.first);
+					setMySecondCheckpoint(res.data.financialCheckpoints.second);
+					setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
+				}
 
-			setMyCareer(res.data.career);
-			setMyChequing(res.data.chequing);
-			setMySavings(res.data.savings);
-		});
+				setMyCareer(res.data.career);
+				setMyChequing(res.data.chequing);
+				setMySavings(res.data.savings);
+			});
 	}, [username]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			axios
-				.get('http://localhost:3001/serverRoom/currentRound/' + servername)
+				.get(
+					'https://the-price-of-life.herokuapp.com/serverRoom/currentRound/' +
+						servername
+				)
 				.then((res) => {
 					setRoundCounter(res.data.roundcounter);
 				});
 
-			axios.get('http://localhost:3001/users/' + username).then((res) => {
-				setMyBudget(res.data.budget);
-				setMySavings(res.data.savings);
-				setMyCareer(res.data.career);
-				setMyChequing(res.data.chequing);
-				setMySavings(res.data.savings);
-				setMySalary(res.data.salary);
-				// setMyGoal(res.data.financialGoal);
-				// setMyFirstCheckpoint(res.data.financialCheckpoints.first);
-				// setMySecondCheckpoint(res.data.financialCheckpoints.second);
-				// setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
-			});
+			axios
+				.get('https://the-price-of-life.herokuapp.com/users/' + username)
+				.then((res) => {
+					setMySavings(res.data.savings);
+					setMyChequing(res.data.chequing);
+					setMyBudget(res.data.budget);
+				});
 
 			axios
-				.get('http://localhost:3001/users/viewStocks/' + username)
+				.get(
+					'https://the-price-of-life.herokuapp.com/users/viewStocks/' + username
+				)
 				.then((res) => {
 					setMyStocks(res.data);
 				});
@@ -288,10 +290,16 @@ const Player = ({ location }) => {
 		};
 
 		axios
-			.post('http://localhost:3001/users/transferMoney/' + username, bankInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/transferMoney/' +
+					username,
+				bankInfo
+			)
 			.then((res) => {
 				console.log('transferred');
 			});
+
+		setShowModal(false);
 	};
 
 	const transferMoneyModal = (
@@ -358,7 +366,11 @@ const Player = ({ location }) => {
 		console.log(myStocks);
 
 		axios
-			.post('http://localhost:3001/users/purchaseStock/' + username, stockInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/purchaseStock/' +
+					username,
+				stockInfo
+			)
 			.then((res) => {
 				console.log('Purchased!');
 			});
@@ -411,10 +423,15 @@ const Player = ({ location }) => {
 			quantity: sellQuantity,
 		};
 		axios
-			.post('http://localhost:3001/users/sellStock/' + username, sellInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/sellStock/' + username,
+				sellInfo
+			)
 			.then((res) => {
 				console.log('Sold!');
 			});
+
+		setShowStockSellModal(false);
 	};
 
 	const StockSellModal = (
@@ -457,7 +474,20 @@ const Player = ({ location }) => {
 						<H2>Choose a Career</H2>
 					</CardHeading>
 					<ChooseCareer username={username}></ChooseCareer>
-					<PrimaryButton onClick={(e) => setCareer(true)}>Next</PrimaryButton>
+					<PrimaryButton
+						onClick={(e) => {
+							axios
+								.get(
+									'https://the-price-of-life.herokuapp.com/users/' + username
+								)
+								.then((res) => {
+									setMyCareer(res.data.career);
+									setMySalary(res.data.salary);
+								});
+							setCareer(true);
+						}}>
+						Next
+					</PrimaryButton>
 				</SetupCard>
 			) : budget === false ? (
 				<SetupCard>
@@ -466,7 +496,19 @@ const Player = ({ location }) => {
 						<H2>Set a Budget</H2>
 					</CardHeading>
 					<SetBudget username={username}></SetBudget>
-					<PrimaryButton onClick={(e) => setBudget(true)}>Next</PrimaryButton>
+					<PrimaryButton
+						onClick={(e) => {
+							axios
+								.get(
+									'https://the-price-of-life.herokuapp.com/users/' + username
+								)
+								.then((res) => {
+									setMyBudget(res.data.budget);
+								});
+							setBudget(true);
+						}}>
+						Next
+					</PrimaryButton>
 				</SetupCard>
 			) : goal === false ? (
 				<SetupCard>
@@ -475,7 +517,22 @@ const Player = ({ location }) => {
 						<H2>Set a Goal</H2>
 					</CardHeading>
 					<SetFinancialGoal username={username}></SetFinancialGoal>
-					<PrimaryButton onClick={(e) => setGoal(true)}>Next</PrimaryButton>
+					<PrimaryButton
+						onClick={(e) => {
+							axios
+								.get(
+									'https://the-price-of-life.herokuapp.com/users/' + username
+								)
+								.then((res) => {
+									setMyGoal(res.data.financialGoal);
+									setMyFirstCheckpoint(res.data.financialCheckpoints.first);
+									setMySecondCheckpoint(res.data.financialCheckpoints.second);
+									setMyGoalCheckpoint(res.data.financialCheckpoints.goal);
+								});
+							setGoal(true);
+						}}>
+						Next
+					</PrimaryButton>
 				</SetupCard>
 			) : (
 				<Grid>
@@ -494,13 +551,24 @@ const Player = ({ location }) => {
 							<CardHeading>
 								<HeadingImg src={Bank}></HeadingImg>
 								<H2>My Bank Accounts</H2>
-								<SmallOutlineButton
-									style={{ marginLeft: 'auto' }}
-									onClick={(e) => {
-										setShowModal(true);
-									}}>
-									Transfer
-								</SmallOutlineButton>
+								{roundCounter % 2 === 0 ? (
+									<SmallOutlineButton
+										style={{ marginLeft: 'auto' }}
+										onClick={(e) => {
+											setShowModal(true);
+										}}>
+										Transfer
+									</SmallOutlineButton>
+								) : (
+									<SmallOutlineButton
+										style={{
+											marginLeft: 'auto',
+											border: '2px solid #aaa',
+											color: '#aaa',
+										}}>
+										Transfer
+									</SmallOutlineButton>
+								)}
 							</CardHeading>
 							{showModal === true ? transferMoneyModal : null}
 							<div>

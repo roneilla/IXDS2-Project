@@ -40,7 +40,10 @@ const ChooseCareer = (props) => {
 		};
 
 		axios
-			.post('http://localhost:3001/users/setCareer/' + username, careerInfo)
+			.post(
+				'https://the-price-of-life.herokuapp.com/users/setCareer/' + username,
+				careerInfo
+			)
 			.then((res) => {
 				setToast(1);
 			});

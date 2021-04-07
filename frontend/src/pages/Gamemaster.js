@@ -122,7 +122,8 @@ const Gamemaster = ({ location }) => {
 
 		axios
 			.post(
-				'http://localhost:3001/serverRoom/updateRound/' + servername,
+				'https://the-price-of-life.herokuapp.com/serverRoom/updateRound/' +
+					servername,
 				roundCounter
 			)
 			.then((res) => {});
@@ -130,7 +131,9 @@ const Gamemaster = ({ location }) => {
 
 	const endGame = () => {
 		axios
-			.delete('http://localhost:3001/serverRoom/' + servername)
+			.delete(
+				'https://the-price-of-life.herokuapp.com/serverRoom/' + servername
+			)
 			.then((res) => {});
 
 		history.push('/play-again');

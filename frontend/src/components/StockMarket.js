@@ -54,6 +54,8 @@ const StockCard = (props) => {
 	let growth = Math.floor(props.monthlyGrowth * props.roundCounter);
 
 	useEffect(() => {
+		setStockPrice(props.startingPrice);
+
 		const interval = setInterval(() => {
 			setStockPrice(
 				props.startingPrice + Math.floor(Math.random(0, growth) * 100)

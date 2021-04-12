@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { FlexBetween, PrimaryButton } from './global';
 import GlossarySearch from './../components/GlossarySearch';
-import GuidebookModal from './../components/GuidebookModal';
 import Glyph from './../assets/Glyph.png';
 
 const Nav = styled.nav`
@@ -30,6 +29,11 @@ const StyledLink = styled(Link)`
 	text-decoration: none;
 `;
 
+const StyledA = styled.a`
+	color: #000;
+	text-decoration: none;
+`;
+
 const StyledImg = styled.img`
 	&:hover {
 		transform: translateX(360deg);
@@ -51,7 +55,12 @@ const NavBar = () => {
 
 				<NavMenu>
 					<NavItem>
-						<StyledLink to="/guidebook">Guidebook</StyledLink>
+						<StyledA
+							rel="noreferrer"
+							href="https://drive.google.com/file/d/1c6LgapP6Zcp1UBV8EuF6e69i16JZXo2N/view"
+							target="_blank">
+							Guidebook
+						</StyledA>
 					</NavItem>
 					<NavItem>
 						<StyledLink to="/glossary">Glossary</StyledLink>
@@ -82,7 +91,15 @@ const NavBar = () => {
 
 					<GlossarySearch></GlossarySearch>
 					<span style={{ width: '25%', textAlign: 'right' }}>
-						<GuidebookModal></GuidebookModal>
+						<PrimaryButton>
+							<StyledA
+								style={{ color: 'white' }}
+								rel="noreferrer"
+								href="https://drive.google.com/file/d/1c6LgapP6Zcp1UBV8EuF6e69i16JZXo2N/view"
+								target="_blank">
+								View Guidebook
+							</StyledA>
+						</PrimaryButton>
 					</span>
 				</FlexBetween>
 			</Nav>

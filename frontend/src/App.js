@@ -14,7 +14,6 @@ import NavBar from './shared/NavBar';
 import Home from './pages/Home';
 import Gamemaster from './pages/Gamemaster';
 import GlossaryPage from './pages/GlossaryPage';
-import Guidebook from './pages/Guidebook';
 import About from './pages/About';
 import Help from './pages/Help';
 import PlayAgain from './pages/PlayAgain';
@@ -44,7 +43,6 @@ const App = () => {
 					<Route exact path="/gamemaster" component={Gamemaster} />
 					<Route exact path="/player" component={Player} />
 					<Route exact path="/glossary" component={GlossaryPage} />
-					<Route exact path="/guidebook" component={Guidebook} />
 					<Route exact path="/about" component={About} />
 					<Route exact path="/help" component={Help} />
 					<Route exact path="/play-again" component={PlayAgain} />

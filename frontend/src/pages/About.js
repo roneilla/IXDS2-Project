@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, P } from './../shared/global';
 import Logo from './../assets/logo.svg';
+import About1 from './../assets/Photos/About-1.png';
+import About2 from './../assets/Photos/About-2.png';
+import About3 from './../assets/Photos/About-3.png';
 
 const Header = styled.div`
 	padding: 2rem 0 5rem 0;
@@ -43,10 +46,11 @@ const About = () => {
 					being financially prepared through the ups and downs of the economy.
 				</P>
 			</Header>
-			<StyledImg alt="Photo of all game components + tablet with the app open"></StyledImg>
-			<StyledImg alt="Close up of board"></StyledImg>
-			<StyledImg alt="Photos of pieces"></StyledImg>
-			<StyledImg alt="Screenshot of app"></StyledImg>
+			<StyledImg src={About1} alt="Photo of all game components"></StyledImg>
+			<StyledImg
+				src={About2}
+				alt="Close up of board during gameplay"></StyledImg>
+			<StyledImg src={About3} alt="Close up of game pieces"></StyledImg>
 		</Container>
 	);
 };
